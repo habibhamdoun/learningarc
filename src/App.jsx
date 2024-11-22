@@ -2,9 +2,9 @@ import './App.css';
 
 function App() {
   return (
-    <main className='bg-white'>
-      <div className='text-blue-500'>hello world</div>
-    </main>
+    <>
+      <button className='btn btn-primary'>hello world</button>
+    </>
   );
 }
 
