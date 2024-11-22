@@ -23,3 +23,6 @@ body {
 .hover-underline-animation:hover::after {
   width: 100%;
 } */
+.circle {
+  clip-path: ellipse(100% 50% at 50% 100%);
+}

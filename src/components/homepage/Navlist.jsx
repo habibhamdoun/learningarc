@@ -7,7 +7,7 @@ const Navlist = () => {
         return (
           <a
             href={'/' + item.replaceAll(' ', '').toLowerCase()}
-            className='text-white text-xl hover:border-b-[3px]  border-secondary rounded-sm transition-all duration-100 '
+            className={`text-white text-xl  border-secondary rounded-sm transition-all duration-100 hover:border-b-[3px]`}
             key={item}
           >
             {item}
