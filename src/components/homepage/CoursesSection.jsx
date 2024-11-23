@@ -5,6 +5,7 @@ import course2 from '../../assets/course2.jpg';
 import course3 from '../../assets/course3.jpg';
 import course4 from '../../assets/course4.jpg';
 import course5 from '../../assets/course5.jpg';
+import { motion } from 'motion/react';
 
 const CoursesSection = () => {
   const carouselRef = useRef(null);
@@ -66,7 +67,11 @@ const CoursesSection = () => {
           ❮
         </button>
 
-        <div
+        <motion.div
+          initial={{ translateX: 300 }}
+          whileInView={{ translateX: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
           className='carousel bg-white carousel-center w-[90vw] rounded-box gap-4 p-4 overflow-x-scroll scroll-smooth'
           ref={carouselRef}
         >
@@ -85,7 +90,7 @@ const CoursesSection = () => {
               </div>
             );
           })}
-        </div>
+        </motion.div>
 
         <button
           className='absolute right-[-20px]  top-1/2 transform -translate-y-1/2 z-10 bg-primary rounded-full shadow-md p-3 hover:bg-secondary transition-colors duration-300'
