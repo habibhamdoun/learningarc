@@ -3,7 +3,7 @@ import Sidebar from './Sidebar';
 
 const Nav = () => {
   return (
-    <div className='drawer'>
+    <div className='drawer sticky top-0 z-[99]'>
       <input id='mobile-drawer' type='checkbox' className='drawer-toggle' />
       <div className='drawer-content'>
         <NavBar />
