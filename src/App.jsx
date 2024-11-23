@@ -1,14 +1,14 @@
 import './App.css';
 import Hero from './components/homepage/Hero';
-import NavBar from './components/homepage/NavBar';
+import Nav from './components/homepage/Nav';
 
 function App() {
   return (
     <>
-      <NavBar />
+      <Nav />
       <Hero />
     </>
   );
 }
-
+document.documentElement.setAttribute('data-theme', 'mytheme');
 export default App;
