@@ -2,21 +2,8 @@ import blog from '../../assets/blogIcon.svg';
 import courses from '../../assets/coursesIcon.svg';
 
 const Sidebar = () => {
-  //   const list = ['Home', 'Courses', 'About', 'Careers', 'Blog'];
-
   return (
     <ul className='menu bg-white min-h-full w-80 p-4 flex flex-col gap-8 text-primary pt-16'>
-      {/* {list.map((item) => {
-        return (
-          <a
-            key={item}
-            className='text-3xl  transition-transform duration-200 hover:translate-x-5'
-            href={item.replaceAll(' ', '').toLocaleLowerCase()}
-          >
-            <li>{item}</li>
-          </a>
-        );'Home', 'Courses', 'About', 'Careers', 'Blog'
-      })} */}
       <a className='text-3xl flex items-center gap-3' href={'/'}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -36,7 +23,7 @@ const Sidebar = () => {
           Home
         </li>
       </a>
-      <a className='text-3xl flex items-center gap-3' href={'/'}>
+      <a className='text-3xl flex items-center gap-3' href={'/courses'}>
         <img src={courses} alt='courses icon' className='w-8 h-8' />
         <li className=' transition-transform duration-200 hover:translate-x-5'>
           Courses
@@ -61,13 +48,13 @@ const Sidebar = () => {
           About
         </li>
       </a>
-      <a className='text-3xl flex items-center gap-3' href={'/'}>
+      <a className='text-3xl flex items-center gap-3' href={'/blog'}>
         <img src={blog} alt='' className='w-8 h-8' />
         <li className=' transition-transform duration-200 hover:translate-x-5'>
           Blog
         </li>
       </a>
-      <a className='text-3xl flex items-center gap-3' href={'/'}>
+      <a className='text-3xl flex items-center gap-3' href={'/carreers'}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-8 w-8'
