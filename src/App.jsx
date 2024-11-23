@@ -1,11 +1,14 @@
 import './App.css';
+import HomePage from './components/homepage/HomePage';
+import Nav from './components/homepage/Nav';
 
 function App() {
   return (
     <>
-      <button className='btn btn-primary'>hello world</button>
+      <Nav />
+      <HomePage />
     </>
   );
 }
-
+document.documentElement.setAttribute('data-theme', 'mytheme');
 export default App;
