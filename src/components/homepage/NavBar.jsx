@@ -12,7 +12,7 @@ const NavBar = () => {
         <img
           src={logo}
           alt='learning arc logo'
-          className='md:w-[7vw] w-[20vw]'
+          className='md:w-[6vw] w-[18vw]'
         />
       </a>
       {isMobile ? (

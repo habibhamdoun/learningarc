@@ -1,12 +1,13 @@
+import { useRef } from 'react';
 import CourseCard from '../General/CourseCard';
 import course1 from '../../assets/course1.jpg';
 import course2 from '../../assets/course2.jpg';
 import course3 from '../../assets/course3.jpg';
 import course4 from '../../assets/course4.jpg';
 import course5 from '../../assets/course5.jpg';
-// import { useScreenSize } from '../../hooks';
 
 const CoursesSection = () => {
+  const carouselRef = useRef(null);
   const courses = [
     {
       imgSrc: course1,
@@ -39,27 +40,59 @@ const CoursesSection = () => {
       instructor: 'James Becker',
     },
   ];
-  //   const isMobile = useScreenSize();
+
+  const scrollCarousel = (direction) => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({
+        left: direction === 'left' ? -500 : 500,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
-    <main className='px-11 text-center md:text-start'>
+    <main className='mb-3 px-11 text-center md:text-start'>
       <div>
         <h2 className='text-4xl font-semibold p-6 text-primary '>
           Popular Courses
         </h2>
       </div>
 
-      <div className='flex md:justify-start justify-center items-center gap-3 flex-wrap'>
-        {courses.map((course) => {
-          return (
-            <CourseCard
-              key={course.title + course.instructor}
-              title={course.title}
-              desc={course.desc}
-              instructor={course.instructor}
-              imgSrc={course.imgSrc}
-            />
-          );
-        })}
+      <div className='relative'>
+        <button
+          className='absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-primary rounded-full shadow-md p-3 hover:bg-secondary transition-colors duration-300'
+          onClick={() => scrollCarousel('left')}
+        >
+          ❮
+        </button>
+
+        <div
+          className='carousel bg-white carousel-center w-[90vw] rounded-box gap-4 p-4 overflow-x-scroll scroll-smooth'
+          ref={carouselRef}
+        >
+          {courses.map((course) => {
+            return (
+              <div
+                className='carousel-item'
+                key={course.title + course.instructor}
+              >
+                <CourseCard
+                  title={course.title}
+                  desc={course.desc}
+                  instructor={course.instructor}
+                  imgSrc={course.imgSrc}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <button
+          className='absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-primary rounded-full shadow-md p-3 hover:bg-secondary transition-colors duration-300'
+          onClick={() => scrollCarousel('right')}
+        >
+          ❯
+        </button>
       </div>
     </main>
   );
