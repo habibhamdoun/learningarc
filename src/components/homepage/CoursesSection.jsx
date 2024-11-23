@@ -88,7 +88,7 @@ const CoursesSection = () => {
         </div>
 
         <button
-          className='absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-primary rounded-full shadow-md p-3 hover:bg-secondary transition-colors duration-300'
+          className='absolute right-[-20px]  top-1/2 transform -translate-y-1/2 z-10 bg-primary rounded-full shadow-md p-3 hover:bg-secondary transition-colors duration-300'
           onClick={() => scrollCarousel('right')}
         >
           ❯

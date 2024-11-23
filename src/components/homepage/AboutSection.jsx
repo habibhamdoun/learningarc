@@ -1,8 +1,10 @@
 import instImg from '../../assets/aboutInstructor.png';
 import stuImg from '../../assets/aboutStudents.png';
+import { useScreenSize } from '../../hooks';
 import AboutCard from './AboutCard';
 
 const AboutSection = () => {
+  const { isMobile } = useScreenSize();
   return (
     <div className='my-4 px-11 flex flex-col items-center gap-8'>
       <div className='text-center flex flex-col items-center gap-4'>
@@ -16,11 +18,8 @@ const AboutSection = () => {
           seamless space to share lecture content, discussions, and resources.
           Educators can engage with students by posting instructional videos and
           facilitating meaningful conversations through threaded discussions.
-          The platform enables efficient content management, allowing
-          instructors to keep track of their posts and interact with students in
-          real-time. With a focus on content sharing and student engagement,
-          LearningArc helps educators deliver valuable learning experiences
-          without the complexity of managing full-scale online classes.
+          {!isMobile &&
+            'The platform enables efficient content management, allowing instructors to keep track of their posts and interact with students in real-time. With a focus on content sharing and student engagement, LearningArc helps educators deliver valuable learning experiences without the complexity of managing full-scale online classes.'}
         </p>
       </div>
       <div className='flex items-center justify-center gap-7 flex-wrap'>
