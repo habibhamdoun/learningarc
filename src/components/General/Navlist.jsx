@@ -22,12 +22,16 @@ const Navlist = () => {
         );
       })}
       <div className='flex gap-2'>
-        <button className='btn btn-light transition-all duration-300 rounded-3xl px-6 text-base'>
-          Login
-        </button>
-        <button className='btn btn-secondary transition-all duration-300 rounded-3xl px-6 text-base text-white hover:btn-primary'>
-          Sign Up
-        </button>
+        <a href='/auth?isLogin=true'>
+          <button className='btn btn-light transition-all duration-300 rounded-3xl px-6 text-base'>
+            Login
+          </button>
+        </a>
+        <a href='/auth?isLogin=false'>
+          <button className='btn btn-secondary transition-all duration-300 rounded-3xl px-6 text-base text-white hover:btn-primary'>
+            Sign Up
+          </button>
+        </a>
       </div>
     </div>
   );
