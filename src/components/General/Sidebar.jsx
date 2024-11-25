@@ -74,12 +74,16 @@ const Sidebar = () => {
         </li>
       </a>
       <div className='flex flex-col gap-2 mt-auto'>
-        <button className='btn  transition-all duration-300 btn-light rounded-3xl px-6 text-base'>
-          Login
-        </button>
-        <button className='btn  transition-all duration-300 btn-secondary rounded-3xl px-6 text-base text-white hover:btn-primary'>
-          Sign Up
-        </button>
+        <a href='/auth'>
+          <button className='btn w-full  transition-all duration-300 btn-light rounded-3xl px-6 text-base'>
+            Login
+          </button>
+        </a>
+        <a href='/auth'>
+          <button className='btn w-full  transition-all duration-300 btn-secondary rounded-3xl px-6 text-base text-white hover:btn-primary'>
+            Sign Up
+          </button>
+        </a>
       </div>
     </ul>
   );
