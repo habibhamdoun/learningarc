@@ -2,17 +2,23 @@ import logo from '../../assets/logo.png';
 import burgerIcon from '../../assets/burgerIcon.svg';
 import { useScreenSize } from '../../hooks';
 import Navlist from './Navlist';
+import { motion } from 'motion/react';
 
 const NavBar = () => {
   const { isMobile } = useScreenSize();
 
   return (
-    <div className='flex items-center justify-between w-[100vw] bg-primary px-11'>
+    <motion.div
+      className='flex items-center justify-between w-[100vw] bg-primary px-11'
+      initial={{ translateY: -300 }}
+      animate={{ translateY: 0 }}
+      transition={{ duration: isMobile ? 0.25 : 0.4 }}
+    >
       <a href='/'>
         <img
           src={logo}
           alt='learning arc logo'
-          className='md:w-[7vw] w-[20vw]'
+          className='md:w-[6vw] w-[18vw]'
         />
       </a>
       {isMobile ? (
@@ -26,7 +32,7 @@ const NavBar = () => {
       ) : (
         <Navlist />
       )}
-    </div>
+    </motion.div>
   );
 };
 
