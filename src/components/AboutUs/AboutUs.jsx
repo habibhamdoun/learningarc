@@ -35,7 +35,7 @@ const AboutUs = () => {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 100 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index / 10 }}
+                  transition={{ duration: 0.5, delay: index / 10 }}
                   className='text-center flex flex-col items-center justify-center'
                 >
                   <p className='md:text-7xl text-5xl font-bold text-transparent bg-clip-text bg-primary-gradient'>
