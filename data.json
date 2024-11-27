@@ -1,0 +1,112 @@
+{
+  "courses": [
+    {
+      "course_id": 1,
+      "title": "Introduction to React",
+      "description": "Learn the basics of React and its core concepts.",
+      "instructor": "John Doe",
+      "content_type": "video",
+      "content_link": "https://example.com/video/1",
+      "date": "2024-01-01",
+      "thumbnail": "/course1.jpg"
+    },
+    {
+      "course_id": 2,
+      "title": "Advanced React Patterns",
+      "description": "Deep dive into React hooks and context API.",
+      "instructor": "Jane Smith",
+      "content_type": "pdf",
+      "content_link": "https://example.com/pdf/2",
+      "date": "2024-02-01",
+      "thumbnail": "/course2.jpg"
+    },
+    {
+      "course_id": 3,
+      "title": "Electronics 1",
+      "description": "This is an electronics course given by this instructor",
+      "instructor": "Harag Hammoud",
+      "content_type": "video",
+      "content_link": "https://example.com/video/3",
+      "date": "2024-03-01",
+      "thumbnail": "/course3.jpg"
+    },
+    {
+      "course_id": 4,
+      "title": "Civil Engineering",
+      "description": "Learn the fundamentals of civil engineering and structures with practical examples.",
+      "instructor": "Alice Johnson",
+      "content_type": "pdf",
+      "content_link": "https://example.com/pdf/4",
+      "date": "2024-04-01",
+      "thumbnail": "/course4.jpg"
+    },
+    {
+      "course_id": 5,
+      "title": "Introduction to Python",
+      "description": "Master Python basics in this comprehensive beginner course.",
+      "instructor": "Mark Peterson",
+      "content_type": "video",
+      "content_link": "https://example.com/video/5",
+      "date": "2024-05-01",
+      "thumbnail": "/course5.jpg"
+    },
+    {
+      "course_id": 6,
+      "title": "Machine Learning Basics",
+      "description": "Explore the fundamentals of machine learning with real-world examples.",
+      "instructor": "Sophia Lee",
+      "content_type": "pdf",
+      "content_link": "https://example.com/pdf/6",
+      "date": "2024-06-01",
+      "thumbnail": "/course2.jpg"
+    },
+    {
+      "course_id": 7,
+      "title": "Circuit Design Fundamentals",
+      "description": "Learn how to design and analyze electrical circuits.",
+      "instructor": "James Becker",
+      "content_type": "video",
+      "content_link": "https://example.com/video/7",
+      "date": "2024-07-01",
+      "thumbnail": "/course5.jpg"
+    }
+  ],
+  "users": [
+    {
+      "user_id": 1,
+      "name": "Alice",
+      "email": "alice@example.com",
+      "role": "student",
+      "playlists": [
+        {
+          "playlist_id": 1,
+          "name": "React Essentials",
+          "courses": [1, 2]
+        },
+        {
+          "playlist_id": 2,
+          "name": "Engineering Basics",
+          "courses": [3, 4]
+        }
+      ]
+    },
+    {
+      "user_id": 2,
+      "name": "Bob",
+      "email": "bob@example.com",
+      "role": "student",
+      "playlists": [
+        {
+          "playlist_id": 3,
+          "name": "Python and Machine Learning",
+          "courses": [5, 6]
+        },
+        {
+          "playlist_id": 4,
+          "name": "Electrical Design",
+          "courses": [7]
+        }
+      ]
+    }
+  ]
+}
