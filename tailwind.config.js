@@ -9,8 +9,9 @@ export default {
         secondary: '#7ECCCE',
         accent: '#136CB5',
       },
-      borderImage: {
-        'custom-gradient': 'linear-gradient(to right, #136CB5, #49BBBD)', // Define gradient for border
+      backgroundImage: {
+        'primary-gradient': 'linear-gradient(to right, #136CB5, #49BBBD)',
+        'primary-gradient-reverse': 'linear-gradient(to left, #136CB5, #49BBBD)',
       },
     },
   },
