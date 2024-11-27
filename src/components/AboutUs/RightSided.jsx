@@ -9,7 +9,7 @@ const RightSided = ({ imageSrc, headingText, paragraphText }) => {
           initial={{ translateX: 300 }}
           whileInView={{ translateX: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5 }}
           src={imageSrc}
           alt=''
           className='max-w-lg w-[70vw] rounded-lg'
@@ -19,7 +19,7 @@ const RightSided = ({ imageSrc, headingText, paragraphText }) => {
           initial={{ translateX: -300 }}
           whileInView={{ translateX: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5 }}
           className='text-center lg:text-left'
         >
           <h1 className='md:text-4xl text-2xl font-bold text-primary leading-tight'>
