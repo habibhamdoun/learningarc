@@ -2,16 +2,17 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Nav from './components/General/Nav';
 import AuthPage from './components/Login/AuthPage';
-import Home from './pages/Home';
+import CoursesPart from './components/CoursesPage/CoursesPart';
+import HomePage from './components/homepage/HomePage';
 
 function App() {
   return (
-    <div>
+    <div className='overflow-x-hidden'>
       <Nav />
       <Routes>
         <Route path={`/`} element={<Navigate to='/home' replace />} />
-        <Route path={`/home`} element={<Home />} />
-        {/* <Route path="/courses" element={<Courses />} /> */}
+        <Route path={`/home`} element={<HomePage />} />
+        <Route path='/courses' element={<CoursesPart />} />
         <Route path='/auth' element={<AuthPage />} />
       </Routes>
     </div>

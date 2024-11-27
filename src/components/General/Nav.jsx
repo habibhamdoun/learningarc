@@ -11,6 +11,14 @@ const Nav = () => {
       <div className='drawer-side'>
         <label htmlFor='mobile-drawer' className='drawer-overlay'></label>
         <Sidebar />
+        <li>
+          <label
+            htmlFor='mobile-drawer'
+            className='btn btn-secondary btn-sm mt-2'
+          >
+            Close
+          </label>
+        </li>
       </div>
     </div>
   );

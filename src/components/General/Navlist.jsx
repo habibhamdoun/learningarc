@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 const Navlist = () => {
   const list = ['Home', 'Courses', 'About', 'Careers', 'Blog'];
   const url = useLocation();
-  console.log(url);
+  // console.log(url);
   return (
     <div className='flex gap-16 justify-around items-center  '>
       {list.map((item) => {
