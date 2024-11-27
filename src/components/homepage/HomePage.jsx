@@ -1,6 +1,6 @@
 import AboutSection from './AboutSection';
 import CoursesSection from './CoursesSection';
-import Footer from './Footer';
+import Footer from '../General/Footer';
 import Hero from './Hero';
 
 const HomePage = () => {
