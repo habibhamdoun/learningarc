@@ -67,7 +67,7 @@ const CoursesPart = () => {
           {tab != 'Trending' && (
             <div>
               <h2 className='px-11 text-primary font-semibold text-3xl md:text-3xl py-3'>
-                Your Playlists:
+                Your Playlists
               </h2>
               {loggedInUser?.playlists.map((playlist) => (
                 <CoursesCarousel
