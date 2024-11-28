@@ -47,7 +47,7 @@ const Form = () => {
         <div className="form-control">
           <button
             type="submit"
-            className="btn btn-primary w-full text-white py-4 font-semibold text-lg"
+            className="btn btn-primary w-full text-white font-semibold text-lg flex items-center justify-center h-16"
           >
             Send Message
           </button>
