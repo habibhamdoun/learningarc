@@ -6,6 +6,7 @@ import CoursesPart from "./components/CoursesPage/CoursesPart";
 import HomePage from "./components/homepage/HomePage";
 import AboutUs from "./components/AboutUs/AboutUs";
 import Contact from "./components/Contact/Contact";
+import Footer from "./components/General/Footer";
 
 function App() {
   return (
@@ -19,8 +20,10 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
+
 document.documentElement.setAttribute("data-theme", "mytheme");
 export default App;

@@ -1,6 +1,5 @@
 import AboutSection from './AboutSection';
 import CoursesSection from './CoursesSection';
-import Footer from './Footer';
 import Hero from './Hero';
 
 const HomePage = () => {
@@ -9,7 +8,6 @@ const HomePage = () => {
       <Hero />
       <AboutSection />
       <CoursesSection />
-      <Footer />
     </>
   );
 };
