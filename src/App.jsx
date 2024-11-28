@@ -5,6 +5,7 @@ import AuthPage from "./components/Login/AuthPage";
 import CoursesPart from "./components/CoursesPage/CoursesPart";
 import HomePage from "./components/homepage/HomePage";
 import AboutUs from "./components/AboutUs/AboutUs";
+import Contact from "./components/Contact/Contact";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/courses" element={<CoursesPart />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
   );
