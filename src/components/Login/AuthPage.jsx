@@ -79,7 +79,7 @@ const AuthPage = () => {
                 <form>
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text font-medium text-accent">
+                      <span className="label-text font-medium text-black">
                         Username
                       </span>
                     </label>
@@ -92,7 +92,7 @@ const AuthPage = () => {
                   </div>
                   <div className="form-control mt-4">
                     <label className="label">
-                      <span className="label-text font-medium text-accent">
+                      <span className="label-text font-medium text-black">
                         Password
                       </span>
                     </label>

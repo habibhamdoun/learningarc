@@ -1,6 +1,5 @@
 import React from "react";
 import image7 from "../../assets/image7.png";
-import Footer from "../homepage/Footer";
 import Form from "./Form";
 
 const Contact = () => {
@@ -22,7 +21,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
