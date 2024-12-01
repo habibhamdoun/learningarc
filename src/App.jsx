@@ -6,6 +6,7 @@ import CoursesPart from './components/CoursesPage/CoursesPart';
 import HomePage from './components/homepage/HomePage';
 import AboutUs from './components/AboutUs/AboutUs';
 import Footer from './components/General/Footer';
+import Course from './components/Course/Course';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path={`/`} element={<Navigate to='/home' replace />} />
         <Route path={`/home`} element={<HomePage />} />
         <Route path='/courses' element={<CoursesPart />} />
+        <Route path='/course/:id' element={<Course />} />
         <Route path='/auth' element={<AuthPage />} />
         <Route path='/aboutus' element={<AboutUs />} />
       </Routes>

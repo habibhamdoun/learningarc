@@ -1,74 +1,115 @@
 {
   "courses": [
+  {
+    "course_id": 1,
+    "title": "Introduction to React",
+    "description": "Learn the basics of React and its core concepts.",
+    "longDesc": "In this course, we will cover the fundamentals of React, including JSX, state, props, and component lifecycle. You'll learn how to create functional and class components, handle events, and manage component state in a React application. By the end of this course, you'll have a solid understanding of React's core concepts, and be ready to build your own React apps.",
+    "instructor": "John Doe",
+    "instructor_id": 3,
+    "content_type": "video",
+    "content_link": "https://example.com/video/1",
+    "date": "2024-01-01",
+    "thumbnail": "/course1.jpg",
+    "lessons": [1, 2, 3, 4, 5, 6, 7]
+  },
+  {
+    "course_id": 2,
+    "title": "Advanced React Patterns",
+    "description": "Deep dive into React hooks and context API.",
+    "longDesc": "This advanced React course takes you beyond the basics, diving deep into React hooks, context API, and higher-order components. You'll explore complex patterns and real-world use cases, including how to manage global state using context, create reusable custom hooks, and integrate external libraries with React. This course is designed for developers looking to master advanced React concepts.",
+    "instructor": "Jane Smith",
+    "instructor_id": 3,
+    "content_type": "pdf",
+    "content_link": "https://example.com/pdf/2",
+    "date": "2024-02-01",
+    "thumbnail": "/course2.jpg",
+    "lessons": [3, 4]
+  },
+  {
+    "course_id": 3,
+    "title": "Electronics 1",
+    "description": "This is an electronics course given by this instructor.",
+    "longDesc": "In this course, you'll learn the basics of electronics, including Ohm's Law, circuits, resistors, capacitors, and inductors. Through practical examples and demonstrations, you'll develop a deep understanding of how electronic components work together to create functional circuits. Perfect for beginners in electronics or those wanting to brush up on their foundational knowledge.",
+    "instructor": "Emily Johnson",
+    "instructor_id": 3,
+    "content_type": "video",
+    "content_link": "https://example.com/video/3",
+    "date": "2024-03-01",
+    "thumbnail": "/course3.jpg",
+    "lessons": [5, 6]
+  },
+  {
+    "course_id": 4,
+    "title": "Civil Engineering",
+    "description": "Learn the fundamentals of civil engineering and structures with practical examples.",
+    "longDesc": "This course introduces students to the key concepts of civil engineering. It covers the basics of structural analysis, material science, and engineering design principles, as well as practical examples of how these concepts are applied in real-world construction projects. You'll also learn about the essential aspects of project management, environmental engineering, and sustainability.",
+    "instructor": "Alice Johnson",
+    "instructor_id": 3,
+    "content_type": "pdf",
+    "content_link": "https://example.com/pdf/4",
+    "date": "2024-04-01",
+    "thumbnail": "/course4.jpg",
+    "lessons": [7, 8]
+  },
+  {
+    "course_id": 5,
+    "title": "Introduction to Python",
+    "description": "Master Python basics in this comprehensive beginner course.",
+    "longDesc": "In this course, we cover the basics of Python programming, including variables, data types, loops, conditionals, and functions. You'll also learn how to use libraries such as NumPy for data manipulation and pandas for handling datasets. This course is ideal for beginners who want to get a solid understanding of Python programming for web development, data science, and automation.",
+    "instructor": "Mark Peterson",
+    "instructor_id": 3,
+    "content_type": "video",
+    "content_link": "https://example.com/video/5",
+    "date": "2024-05-01",
+    "thumbnail": "/course5.jpg",
+    "lessons": [9, 10]
+  },
+  {
+    "course_id": 6,
+    "title": "Machine Learning Basics",
+    "description": "Explore the fundamentals of machine learning with real-world examples.",
+    "longDesc": "This course provides an introduction to machine learning, covering the basics of supervised and unsupervised learning, regression, classification, and clustering algorithms. You'll also gain hands-on experience using popular machine learning libraries such as Scikit-learn. By the end of the course, you will have a good understanding of how to apply machine learning algorithms to solve real-world problems.",
+    "instructor": "Sophia Lee",
+    "instructor_id": 3,
+    "content_type": "pdf",
+    "content_link": "https://example.com/pdf/6",
+    "date": "2024-06-01",
+    "thumbnail": "/course2.jpg",
+    "lessons": [11, 12]
+  },
+  {
+    "course_id": 7,
+    "title": "Circuit Design Fundamentals",
+    "description": "Learn how to design and analyze electrical circuits.",
+    "longDesc": "This course covers the fundamental principles of electrical circuit design. You'll learn how to use circuit analysis tools such as Ohm's Law, Kirchhoff's Laws, and Thevenin's Theorem. You'll also gain hands-on experience in designing and simulating circuits, working with resistors, capacitors, inductors, and diodes, and understanding their behavior in different circuit configurations.",
+    "instructor": "James Becker",
+    "instructor_id": 3,
+    "content_type": "video",
+    "content_link": "https://example.com/video/7",
+    "date": "2024-07-01",
+    "thumbnail": "/course5.jpg",
+    "lessons": [13]
+  }
+],
+  "instructors": [
     {
-      "course_id": 1,
-      "title": "Introduction to React",
-      "description": "Learn the basics of React and its core concepts.",
-      "instructor": "John Doe",
-      "content_type": "video",
-      "content_link": "https://example.com/video/1",
-      "date": "2024-01-01",
-      "thumbnail": "/course1.jpg"
+      "id": 1,
+      "name": "Dr. Sarah Johnson",
+      "profile_pic": "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
+      "description": "Expert in Data Science and Machine Learning with 10+ years of teaching experience."
     },
     {
-      "course_id": 2,
-      "title": "Advanced React Patterns",
-      "description": "Deep dive into React hooks and context API.",
-      "instructor": "Jane Smith",
-      "content_type": "pdf",
-      "content_link": "https://example.com/pdf/2",
-      "date": "2024-02-01",
-      "thumbnail": "/course2.jpg"
+      "id": 2,
+      "name": "Prof. Michael Lee",
+      "profile_pic": "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
+      "description": "Specializes in Web Development and Database Systems, focusing on hands-on teaching."
     },
     {
-      "course_id": 3,
-      "title": "Electronics 1",
-      "description": "This is an electronics course given by this instructor",
-      "instructor": "Harag Hammoud",
-      "content_type": "video",
-      "content_link": "https://example.com/video/3",
-      "date": "2024-03-01",
-      "thumbnail": "/course3.jpg"
-    },
-    {
-      "course_id": 4,
-      "title": "Civil Engineering",
-      "description": "Learn the fundamentals of civil engineering and structures with practical examples.",
-      "instructor": "Alice Johnson",
-      "content_type": "pdf",
-      "content_link": "https://example.com/pdf/4",
-      "date": "2024-04-01",
-      "thumbnail": "/course4.jpg"
-    },
-    {
-      "course_id": 5,
-      "title": "Introduction to Python",
-      "description": "Master Python basics in this comprehensive beginner course.",
-      "instructor": "Mark Peterson",
-      "content_type": "video",
-      "content_link": "https://example.com/video/5",
-      "date": "2024-05-01",
-      "thumbnail": "/course5.jpg"
-    },
-    {
-      "course_id": 6,
-      "title": "Machine Learning Basics",
-      "description": "Explore the fundamentals of machine learning with real-world examples.",
-      "instructor": "Sophia Lee",
-      "content_type": "pdf",
-      "content_link": "https://example.com/pdf/6",
-      "date": "2024-06-01",
-      "thumbnail": "/course2.jpg"
-    },
-    {
-      "course_id": 7,
-      "title": "Circuit Design Fundamentals",
-      "description": "Learn how to design and analyze electrical circuits.",
-      "instructor": "James Becker",
-      "content_type": "video",
-      "content_link": "https://example.com/video/7",
-      "date": "2024-07-01",
-      "thumbnail": "/course5.jpg"
+      "id": 3,
+      "name": "Ms. Emily Davis",
+      "profile_pic": "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
+      "description": "Passionate about programming languages and problem-solving techniques."
     }
   ],
   "users": [
@@ -107,6 +148,151 @@
           "courses": [7]
         }
       ]
+    }
+  ],
+  "lessons": [
+    {
+      "lesson_id": 1,
+      "course_id": 1,
+      "title": "Introduction to React Basics",
+      "description": "Learn how to set up a React app and understand JSX syntax.",
+      "content_type": "video",
+      "content_link": "https://example.com/lesson1",
+      "date_posted": "2024-01-02",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "In this lesson, you will be introduced to the basics of React, learning how to set up a React app, understand JSX syntax, and create functional components."
+    },
+    {
+      "lesson_id": 2,
+      "course_id": 1,
+      "title": "React JSX and Components",
+      "description": "Learn how JSX and components work together in React.",
+      "content_type": "video",
+      "content_link": "https://example.com/lesson2",
+      "date_posted": "2024-01-03",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "This lesson covers the concept of JSX in React, showing how to write HTML-like syntax within JavaScript and how to work with React components."
+    },
+    {
+      "lesson_id": 3,
+      "course_id": 2,
+      "title": "React Hooks Basics",
+      "description": "Learn about React hooks such as useState and useEffect.",
+      "content_type": "pdf",
+      "content_link": "https://example.com/lesson3",
+      "date_posted": "2024-02-02",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "In this lesson, we introduce React hooks, such as useState and useEffect, and explain their significance in managing state and side effects in functional components."
+    },
+    {
+      "lesson_id": 4,
+      "course_id": 2,
+      "title": "Advanced React State Management",
+      "description": "Learn advanced techniques for managing state in React.",
+      "content_type": "pdf",
+      "content_link": "https://example.com/lesson4",
+      "date_posted": "2024-02-03",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "Learn advanced techniques for managing application state, including using context API, Redux, and React's built-in hooks."
+    },
+    {
+      "lesson_id": 5,
+      "course_id": 3,
+      "title": "Basics of Electronics",
+      "description": "Introduction to basic electronic components and circuits.",
+      "content_type": "video",
+      "content_link": "https://example.com/lesson5",
+      "date_posted": "2024-03-02",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "This lesson introduces key concepts in electronics, such as voltage, current, resistance, and how they relate to circuit design."
+    },
+    {
+      "lesson_id": 6,
+      "course_id": 3,
+      "title": "Understanding Circuits",
+      "description": "Understand how resistors, capacitors, and inductors work in circuits.",
+      "content_type": "video",
+      "content_link": "https://example.com/lesson6",
+      "date_posted": "2024-03-03",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "In this lesson, you'll learn how to analyze simple circuits, understanding how components like resistors, capacitors, and inductors behave in circuits."
+    },
+    {
+      "lesson_id": 7,
+      "course_id": 4,
+      "title": "Introduction to Civil Engineering",
+      "description": "Learn about the core principles of civil engineering.",
+      "content_type": "pdf",
+      "content_link": "https://example.com/lesson7",
+      "date_posted": "2024-04-02",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "This lesson covers the basics of civil engineering, including key principles in structural analysis, material properties, and engineering design processes."
+    },
+    {
+      "lesson_id": 8,
+      "course_id": 4,
+      "title": "Structural Analysis and Design",
+      "description": "Understand how to analyze and design structures.",
+      "content_type": "pdf",
+      "content_link": "https://example.com/lesson8",
+      "date_posted": "2024-04-03",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "Learn how to analyze and design structures using the principles of static equilibrium, shear force, bending moments, and other structural analysis techniques."
+    },
+    {
+      "lesson_id": 9,
+      "course_id": 5,
+      "title": "Introduction to Python Syntax",
+      "description": "Learn basic Python syntax and programming concepts.",
+      "content_type": "video",
+      "content_link": "https://example.com/lesson9",
+      "date_posted": "2024-05-02",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "In this lesson, you'll be introduced to Python syntax, including how to define variables, work with basic data types, and write simple functions."
+    },
+    {
+      "lesson_id": 10,
+      "course_id": 5,
+      "title": "Python Functions and Loops",
+      "description": "Learn about functions, loops, and control flow in Python.",
+      "content_type": "video",
+      "content_link": "https://example.com/lesson10",
+      "date_posted": "2024-05-03",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "This lesson covers Python functions, loops, and conditional statements, allowing you to create reusable code and implement control flow in your programs."
+    },
+    {
+      "lesson_id": 11,
+      "course_id": 6,
+      "title": "Intro to Machine Learning Algorithms",
+      "description": "Understand the basics of machine learning algorithms.",
+      "content_type": "pdf",
+      "content_link": "https://example.com/lesson11",
+      "date_posted": "2024-06-02",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "This lesson introduces common machine learning algorithms, including linear regression, k-nearest neighbors, and decision trees."
+    },
+    {
+      "lesson_id": 12,
+      "course_id": 6,
+      "title": "Training and Testing Models",
+      "description": "Learn how to train and evaluate machine learning models.",
+      "content_type": "pdf",
+      "content_link": "https://example.com/lesson12",
+      "date_posted": "2024-06-03",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "Learn how to train and evaluate machine learning models, including splitting datasets, applying cross-validation, and optimizing model performance."
+    },
+    {
+      "lesson_id": 13,
+      "course_id": 7,
+      "title": "Understanding Circuit Design",
+      "description": "Explore the fundamentals of circuit design.",
+      "content_type": "video",
+      "content_link": "https://example.com/lesson13",
+      "date_posted": "2024-07-02",
+      "thumbnail": "/course3.jpg",
+      "longDesc": "In this lesson, you'll learn about different circuit design techniques, focusing on signal processing, power management, and signal integrity in circuits."
     }
   ]
 }
