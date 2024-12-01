@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import coursesData from '../../../data.json';
 import LessonsDD from './LessonsDD';
 import Profile from '../General/Profile';
+import calendar from '../../assets/calendarIcon2.svg';
 
 const Course = () => {
   const { id } = useParams();
@@ -56,9 +57,13 @@ const Course = () => {
             {course.title}
           </h3>
           <p className='w-full lg:text-xl'>{course.longDesc}</p>
-          <p className=' w-fit bg-primary text-white py-1 px-2 rounded-full text-base'>
-            {course.date}
-          </p>
+
+          <div className='flex gap-1 items-center'>
+            <img src={calendar} alt='' className='w-4 h-4' />
+            <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
+              {course.date}
+            </p>
+          </div>
           <div>
             {!loadingInstructor ? (
               <Profile

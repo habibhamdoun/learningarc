@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const AboutCard = ({ imgSrc, text, btnText, btnClass }) => {
+const AboutCard = ({ imgSrc, text, btnText, btnClass, btnLink }) => {
   return (
     <div className='card bg-base-100 image-full w-[30vw] min-w-96 shadow-xl'>
       <figure>
@@ -9,9 +9,11 @@ const AboutCard = ({ imgSrc, text, btnText, btnClass }) => {
       <div className='card-body justify-center gap-6 items-center'>
         <h2 className='card-title text-4xl'>{text?.toUpperCase()}</h2>
         <div className='card-actions justify-center'>
-          <button className={`btn  text-xl rounded-3xl px-6 ${btnClass} `}>
-            {btnText}
-          </button>
+          <a href={btnLink}>
+            <button className={`btn  text-xl rounded-3xl px-6 ${btnClass} `}>
+              {btnText}
+            </button>
+          </a>
         </div>
       </div>
     </div>
@@ -22,6 +24,7 @@ AboutCard.propTypes = {
   text: PropTypes.string.isRequired,
   btnText: PropTypes.string.isRequired,
   btnClass: PropTypes.string.isRequired,
+  btnLink: PropTypes.string.isRequired,
 };
 
 export default AboutCard;

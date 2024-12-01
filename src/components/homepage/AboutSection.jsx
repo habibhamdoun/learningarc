@@ -28,12 +28,14 @@ const AboutSection = () => {
           text={'For Instructors'}
           btnText={'Upload Courses'}
           btnClass={'btn-outline border-white text-white'}
+          btnLink={'/dashboard'}
         />
         <AboutCard
           imgSrc={stuImg}
           text={'For Students'}
           btnText={'Take Lessons'}
           btnClass={'btn-primary'}
+          btnLink={'/courses'}
         />
       </div>
     </div>

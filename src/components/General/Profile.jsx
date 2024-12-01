@@ -6,7 +6,7 @@ const Profile = ({ name, pic, description }) => {
   return (
     <div className='flex gap-5'>
       {pic ? (
-        <div className='avatar w-32 min-w-28'>
+        <div className='avatar w-28'>
           <div className='ring-primary ring-offset-base-100 w-full rounded-full ring ring-offset-2'>
             <img src={pic} />
           </div>
