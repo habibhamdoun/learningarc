@@ -7,6 +7,8 @@ import HomePage from "./components/homepage/HomePage";
 import AboutUs from "./components/AboutUs/AboutUs";
 import Contact from "./components/Contact/Contact";
 import Footer from "./components/General/Footer";
+import AdminPage from "./components/Dashboard/AdminPage";
+import AddCourse from "./components/Dashboard/pages/AddCourse";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/add" element={<AddCourse />} />
       </Routes>
       <Footer />
     </div>
