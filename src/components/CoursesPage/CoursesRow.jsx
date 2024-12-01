@@ -13,6 +13,7 @@ const CoursesRow = ({ courses, isCarousel, width }) => {
             key={course.course_id}
           >
             <CourseCard
+              id={course.course_id}
               title={course.title}
               desc={course.description}
               instructor={course.instructor}

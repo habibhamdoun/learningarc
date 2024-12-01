@@ -11,7 +11,8 @@ export default {
       },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(to right, #136CB5, #49BBBD)',
-        'primary-gradient-reverse': 'linear-gradient(to left, #136CB5, #49BBBD)',
+        'primary-gradient-reverse':
+          'linear-gradient(to left, #136CB5, #49BBBD)',
       },
     },
   },
