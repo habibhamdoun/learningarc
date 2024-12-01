@@ -43,7 +43,7 @@ const Course = () => {
   }
 
   return (
-    <div className='px-11 py-5'>
+    <div className='px-11 py-10'>
       <div className='flex flex-col lg:flex-row gap-7'>
         <a href={`/course/${course.course_id}/lesson/${course.lessons}`}>
           <img
@@ -53,17 +53,9 @@ const Course = () => {
           />
         </a>
         <div className='flex flex-col gap-10 lg:w-1/2'>
-          <h3 className='md:text-7xl text-5xl font-bold text-transparent bg-clip-text bg-primary-gradient-reverse py-3'>
+          <h3 className='md:text-6xl text-5xl font-bold text-transparent bg-clip-text bg-primary-gradient-reverse py-3'>
             {course.title}
           </h3>
-          <p className='w-full lg:text-xl'>{course.longDesc}</p>
-
-          <div className='flex gap-1 items-center'>
-            <img src={calendar} alt='' className='w-4 h-4' />
-            <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
-              {course.date}
-            </p>
-          </div>
           <div>
             {!loadingInstructor ? (
               <Profile
@@ -74,6 +66,14 @@ const Course = () => {
             ) : (
               <div>loading</div>
             )}
+          </div>
+          <p className='w-full lg:text-xl'>{course.longDesc}</p>
+
+          <div className='flex gap-1 items-center'>
+            <img src={calendar} alt='' className='w-4 h-4' />
+            <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
+              {course.date}
+            </p>
           </div>
         </div>
       </div>
