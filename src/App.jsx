@@ -13,7 +13,7 @@ import AddCourse from './components/Dashboard/pages/AddCourse';
 
 function App() {
   return (
-    <div className='overflow-x-hidden'>
+    <div>
       <Nav />
       <Routes>
         <Route path={`/`} element={<Navigate to='/home' replace />} />
