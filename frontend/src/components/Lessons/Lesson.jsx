@@ -62,7 +62,7 @@ const Lesson = () => {
       <div className='flex flex-col lg:flex-row gap-7'>
         <ReactPlayer
           light={<img src={lesson.thumbnail} alt='Thumbnail' />}
-          url={lesson.content_link}
+          url={'https://www.w3schools.com/html/mov_bbb.mp4'}
           className='react-player'
           playing={false}
           controls
