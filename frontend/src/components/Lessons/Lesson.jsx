@@ -12,8 +12,30 @@ const Lesson = () => {
   const [lesson, setLesson] = useState(null);
   const [course, setCourse] = useState(null);
   const [lessons, setLessons] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
+  const [newReply, setNewReply] = useState('');
   const [instructor, setInstructor] = useState(null);
   const [loadingInstructor, setLoadingInstructor] = useState(true);
+
+  //TODO:CHANGE THE COMMENT retreiving and ADDING + reply
+  useEffect(() => {
+    if (!lesson) return;
+    setComments(lesson.comments);
+  }, [lesson]);
+
+  const handleAddComment = () => {
+    if (newComment.trim() === '') return; // Prevent empty comments
+    const newCommentData = {
+      id: Date.now(),
+      content: newComment,
+      date: new Date().toLocaleString(),
+    };
+    setComments((prevComments) => [...prevComments, newCommentData]);
+    setNewComment(''); // Clear the input field
+  };
+
+  const handleAddReply = () => {};
 
   useEffect(() => {
     const selectedLesson = coursesData.lessons.find(
@@ -94,30 +116,84 @@ const Lesson = () => {
           </div>
         </div>
       </div>
-      <div className='collapse lg:w-[48.5vw] w-full collapse-arrow bg-primary mt-5 text-white '>
-        <input type='checkbox' />
-        <div className='collapse-title text-xl font-medium '>
-          Additional Topics in This Course{' '}
+      <div className='flex items-baseline gap-3 justify-center flex-col '>
+        <div className=' flex-grow-0 collapse lg:w-[48.5vw] w-full collapse-arrow bg-primary mt-5 text-white '>
+          <input type='checkbox' />
+          <div className='collapse-title text-xl font-medium '>
+            Additional Topics in This Course{' '}
+          </div>
+          <ol className='collapse-content list-decimal flex flex-col gap-3 pl-6'>
+            {lessons.length == 0 ? (
+              <div className='flex w-full justify-center'>
+                <span className='loading loading-infinity w-20'></span>
+              </div>
+            ) : (
+              lessons.map((lesson) => {
+                return (
+                  <div key={lesson} className='px-4'>
+                    <LessonsDD
+                      key={lesson}
+                      lesson={lesson}
+                      watching={lesson.lesson_id == lessonId}
+                    />
+                  </div>
+                );
+              })
+            )}
+          </ol>
         </div>
-        <ol className='collapse-content list-decimal flex flex-col gap-3 pl-6'>
-          {lessons.length == 0 ? (
-            <div className='flex w-full justify-center'>
-              <span className='loading loading-infinity w-20'></span>
-            </div>
-          ) : (
-            lessons.map((lesson) => {
-              return (
-                <div key={lesson} className='px-4'>
-                  <LessonsDD
-                    key={lesson}
-                    lesson={lesson}
-                    watching={lesson.lesson_id == lessonId}
-                  />
+        <div className='mt-8 w-full'>
+          <h2 className='text-2xl font-bold mb-4'>Comments</h2>
+          {/* Display Comments */}
+          <div className='flex flex-col gap-4 mb-6'>
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <div
+                  key={comment.id}
+                  className='p-4 bg-gray-100 rounded-md shadow-md'
+                >
+                  <div className='w-4'>
+                    <Profile name={comment.commenter} small={true} />
+                  </div>
+                  <p className='text-sm text-gray-600'>{comment.date}</p>
+                  <p className='mt-2'>{comment.content}</p>
+                  <div className='flex gap-2 mt-3'>
+                    <input
+                      type='text'
+                      placeholder='Add Reply'
+                      className='input input-bordered input-primary t  ext-sm'
+                      value={newReply}
+                      onChange={(e) => setNewReply(e.target.value)}
+                    />
+                    <button
+                      className='px-2 py-2 text-xs bg-primary text-white rounded-md hover:bg-blue-600 transition-colors duration-300'
+                      onClick={handleAddReply}
+                    >
+                      Reply
+                    </button>
+                  </div>
                 </div>
-              );
-            })
-          )}
-        </ol>
+              ))
+            ) : (
+              <p>No comments yet. Be the first to comment!</p>
+            )}
+          </div>
+          <div className='flex gap-2'>
+            <input
+              type='text'
+              placeholder='Type here'
+              className='input input-bordered input-primary w-full'
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <button
+              className=' px-3 text-xs bg-primary text-white rounded-md hover:bg-blue-600 transition-colors duration-300'
+              onClick={handleAddComment}
+            >
+              Comment
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
