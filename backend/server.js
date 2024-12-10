@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/students', studentRoutes);
-app.use('/api/course', courseRoutes);
+app.use('/api/courses', courseRoutes);
 
 // Start the server
 app.listen(PORT, () => {
