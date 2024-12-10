@@ -8,7 +8,7 @@
             "instructor": "John Doe",
             "instructor_id": 3,
             "content_type": "video",
-            "content_link": "https://example.com/video/1",
+            "content_link": "https://www.w3schools.com/html/mov_bbb.mp4",
             "date": "2024-01-01",
             "thumbnail": "/course1.jpg",
             "lessons": [
@@ -28,8 +28,8 @@
             "longDesc": "This advanced React course takes you beyond the basics, diving deep into React hooks, context API, and higher-order components. You'll explore complex patterns and real-world use cases, including how to manage global state using context, create reusable custom hooks, and integrate external libraries with React. This course is designed for developers looking to master advanced React concepts.",
             "instructor": "Jane Smith",
             "instructor_id": 3,
-            "content_type": "pdf",
-            "content_link": "https://example.com/pdf/2",
+            "content_type": "video",
+            "content_link": "https://www.w3schools.com/html/mov_bbb.mp4",
             "date": "2024-02-01",
             "thumbnail": "/course2.jpg",
             "lessons": [
@@ -45,7 +45,7 @@
             "instructor": "Emily Johnson",
             "instructor_id": 3,
             "content_type": "video",
-            "content_link": "https://example.com/video/3",
+            "content_link": "https://www.w3schools.com/html/mov_bbb.mp4",
             "date": "2024-03-01",
             "thumbnail": "/course3.jpg",
             "lessons": [
@@ -60,8 +60,8 @@
             "longDesc": "This course introduces students to the key concepts of civil engineering. It covers the basics of structural analysis, material science, and engineering design principles, as well as practical examples of how these concepts are applied in real-world construction projects. You'll also learn about the essential aspects of project management, environmental engineering, and sustainability.",
             "instructor": "Alice Johnson",
             "instructor_id": 3,
-            "content_type": "pdf",
-            "content_link": "https://example.com/pdf/4",
+            "content_type": "video",
+            "content_link": "https://www.w3schools.com/html/mov_bbb.mp4",
             "date": "2024-04-01",
             "thumbnail": "/course4.jpg",
             "lessons": [
@@ -77,7 +77,7 @@
             "instructor": "Mark Peterson",
             "instructor_id": 3,
             "content_type": "video",
-            "content_link": "https://example.com/video/5",
+            "content_link": "https://www.w3schools.com/html/mov_bbb.mp4",
             "date": "2024-05-01",
             "thumbnail": "/course5.jpg",
             "lessons": [
@@ -92,8 +92,8 @@
             "longDesc": "This course provides an introduction to machine learning, covering the basics of supervised and unsupervised learning, regression, classification, and clustering algorithms. You'll also gain hands-on experience using popular machine learning libraries such as Scikit-learn. By the end of the course, you will have a good understanding of how to apply machine learning algorithms to solve real-world problems.",
             "instructor": "Sophia Lee",
             "instructor_id": 3,
-            "content_type": "pdf",
-            "content_link": "https://example.com/pdf/6",
+            "content_type": "video",
+            "content_link": "https://www.w3schools.com/html/mov_bbb.mp4",
             "date": "2024-06-01",
             "thumbnail": "/course2.jpg",
             "lessons": [
@@ -109,7 +109,7 @@
             "instructor": "James Becker",
             "instructor_id": 3,
             "content_type": "video",
-            "content_link": "https://example.com/video/7",
+            "content_link": "https://www.w3schools.com/html/mov_bbb.mp4",
             "date": "2024-07-01",
             "thumbnail": "/course5.jpg",
             "lessons": [
@@ -237,7 +237,7 @@
             "course_id": 2,
             "title": "React Hooks Basics",
             "description": "Learn about React hooks such as useState and useEffect.",
-            "content_type": "pdf",
+            "content_type": "video",
             "content_link": "https://example.com/lesson3",
             "date_posted": "2024-02-02",
             "thumbnail": "/course3.jpg",

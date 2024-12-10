@@ -21,11 +21,13 @@ const Course = () => {
     console.log(selectedCourse);
   }, [courseId]);
   useEffect(() => {
+    if (!course) return;
     const selectedLessons = coursesData.lessons.filter((lesson) =>
       course?.lessons.includes(lesson.lesson_id),
     );
     setLessons(selectedLessons);
-  }, [course, coursesData]);
+    console.log(lessons);
+  }, [course]);
 
   useEffect(() => {
     const selectedInstructor = coursesData.instructors.find(
@@ -95,11 +97,19 @@ const Course = () => {
           Lessons Included
         </div>
         <ol className='collapse-content list-decimal flex flex-col gap-3 pl-6'>
-          {lessons.map((lesson) => (
-            <div key={lesson} className='px-4'>
-              <LessonsDD key={lesson} lesson={lesson} />
+          {lessons.length == 0 ? (
+            <div className='flex w-full justify-center'>
+              <span className='loading loading-infinity w-20'></span>
             </div>
-          ))}
+          ) : (
+            lessons.map((lesson) => {
+              return (
+                <div key={lesson} className='px-4'>
+                  <LessonsDD key={lesson} lesson={lesson} watching={false} />
+                </div>
+              );
+            })
+          )}
         </ol>
       </div>
     </div>
