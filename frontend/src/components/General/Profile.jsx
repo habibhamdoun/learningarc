@@ -24,7 +24,7 @@ const Profile = ({ name, pic, description, small }) => {
       return colors[randomIndex];
     };
     setRandomColor(getRandomTailwindColor());
-  });
+  }, []);
   return (
     <div className='flex gap-5'>
       {pic ? (
