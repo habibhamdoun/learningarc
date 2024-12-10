@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 
-const LessonsDD = ({ lesson }) => {
+const LessonsDD = ({ lesson, watching }) => {
   return (
     <li className='list-item '>
       <div className='card card-compact bg-base-100 w-full '>
-        {/* <figure><img src={lesson.thumbnail} alt='Shoes' /></figure> */}
         <div className='card-body bg-primary shadow-none'>
-          <h2 className='card-title text-lg'>{lesson.title}</h2>
+          <div className='flex justify-between items-center w-full'>
+            <h2 className='card-title text-lg'>{lesson.title}</h2>
+            {watching && <p className='flex-grow-0 font-bold'>NOW WATCHING</p>}
+          </div>
           <p>{lesson.description}</p>
           <p className='italic'>{lesson.date_posted}</p>
           <div className='card-actions justify-end'>
@@ -24,5 +26,6 @@ const LessonsDD = ({ lesson }) => {
 LessonsDD.propTypes = {
   title: PropTypes.string.isRequired,
   lesson: PropTypes.object.isRequired,
+  watching: PropTypes.bool.isRequired,
 };
 export default LessonsDD;

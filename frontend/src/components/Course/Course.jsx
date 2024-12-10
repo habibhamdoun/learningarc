@@ -4,9 +4,10 @@ import coursesData from '../../../data.json';
 import LessonsDD from './LessonsDD';
 import Profile from '../General/Profile';
 import calendar from '../../assets/calendarIcon2.svg';
+import playIcon from '../../assets/playIcon.svg';
 
 const Course = () => {
-  const { id } = useParams();
+  const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [lessons, setLessons] = useState([]);
   const [instructor, setInstructor] = useState(null);
@@ -14,17 +15,19 @@ const Course = () => {
 
   useEffect(() => {
     const selectedCourse = coursesData.courses.find(
-      (course) => course.course_id === parseInt(id),
+      (course) => course.course_id === parseInt(courseId),
     );
     setCourse(selectedCourse);
     console.log(selectedCourse);
-  }, [id]);
+  }, [courseId]);
   useEffect(() => {
+    if (!course) return;
     const selectedLessons = coursesData.lessons.filter((lesson) =>
       course?.lessons.includes(lesson.lesson_id),
     );
     setLessons(selectedLessons);
-  }, [course, coursesData]);
+    console.log(lessons);
+  }, [course]);
 
   useEffect(() => {
     const selectedInstructor = coursesData.instructors.find(
@@ -45,12 +48,23 @@ const Course = () => {
   return (
     <div className='px-11 py-10'>
       <div className='flex flex-col lg:flex-row gap-7'>
-        <a href={`/course/${course.course_id}/lesson/${course.lessons}`}>
+        <a
+          href={`/course/${course.course_id}/lesson/${course.lessons[0]}`}
+          className='relative box-border p-0'
+        >
           <img
             src={course.thumbnail}
             alt='thumbnail'
             className='p-0 lg:w-[50vw] w-[100vw] rounded-lg shadow-2xl lg:h-[30vw] h-[50vw] '
           />
+          <div className='absolute top-0 bg-[#00000060] z-20 w-full h-full'></div>
+          <div className='absolute top-1/2 left-1/2 z-30 bg-[#00000040] p-5 rounded-full transform -translate-x-1/2 -translate-y-1/2 hover:scale-125 transition-transform duration-300'>
+            <img
+              src={playIcon}
+              alt=''
+              className='w-16 h-16 hover:scale-110 transition-transform duration-300'
+            />
+          </div>
         </a>
         <div className='flex flex-col gap-10 lg:w-1/2'>
           <h3 className='md:text-6xl text-5xl font-bold text-transparent bg-clip-text bg-primary-gradient-reverse py-3'>
@@ -83,11 +97,19 @@ const Course = () => {
           Lessons Included
         </div>
         <ol className='collapse-content list-decimal flex flex-col gap-3 pl-6'>
-          {lessons.map((lesson) => (
-            <div key={lesson} className='px-4'>
-              <LessonsDD key={lesson} lesson={lesson} />
+          {lessons.length == 0 ? (
+            <div className='flex w-full justify-center'>
+              <span className='loading loading-infinity w-20'></span>
             </div>
-          ))}
+          ) : (
+            lessons.map((lesson) => {
+              return (
+                <div key={lesson} className='px-4'>
+                  <LessonsDD key={lesson} lesson={lesson} watching={false} />
+                </div>
+              );
+            })
+          )}
         </ol>
       </div>
     </div>
