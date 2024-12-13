@@ -12,7 +12,7 @@ const LessonsDD = ({ lesson, watching }) => {
           <p>{lesson.description}</p>
           <p className='italic'>{lesson.date_posted}</p>
           <div className='card-actions justify-end'>
-            <a href={`/course/${lesson.course_id}/lesson/${lesson.lesson_id}`}>
+            <a href={`/course/${lesson.courseID}/lesson/${lesson.lessonID}`}>
               <button className='btn text-white btn-secondary'>
                 Check Out
               </button>
