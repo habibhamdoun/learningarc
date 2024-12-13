@@ -5,6 +5,8 @@ import mysql from 'mysql2';
 import dotenv from 'dotenv';
 import studentRoutes from './routes/studentRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
+import lessonRoutes from './routes/lessonRoutes.js';
+import instructorRoutes from './routes/instructorRoutes.js';
 
 dotenv.config();
 
@@ -40,6 +42,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/students', studentRoutes);
 app.use('/api/courses', courseRoutes);
+app.use('/api/lessons', lessonRoutes);
+app.use('/api/instructors', instructorRoutes);
 
 // Start the server
 app.listen(PORT, () => {

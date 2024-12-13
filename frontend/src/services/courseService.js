@@ -12,6 +12,16 @@ export const getCourses = async () => {
   }
 };
 
+export const getCourse = async (courseID) => {
+  try {
+    const response = await axios.get(`${API_URL}/${courseID}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching course:', error);
+    throw error;
+  }
+};
+
 // Add a new student
 export const addCourse = async (courseData) => {
   try {
