@@ -1,13 +1,16 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import coursesData from '../../../data.json';
 import LessonsDD from '../Course/LessonsDD';
 import Profile from '../General/Profile';
 import calendar from '../../assets/calendarIcon2.svg';
 import ReactPlayer from 'react-player';
+import { getLesson, getLessonByCourseID } from '../../services/lessonService';
+import { getInstructorByCourse } from '../../services/instructorService';
+import { getCourse } from '../../services/courseService';
 
 const Lesson = () => {
   const { lessonId } = useParams();
+  const { courseId } = useParams();
 
   const [lesson, setLesson] = useState(null);
   const [course, setCourse] = useState(null);
@@ -19,10 +22,10 @@ const Lesson = () => {
   const [loadingInstructor, setLoadingInstructor] = useState(true);
 
   //TODO:CHANGE THE COMMENT retreiving and ADDING + reply
-  useEffect(() => {
-    if (!lesson) return;
-    setComments(lesson.comments);
-  }, [lesson]);
+  // useEffect(() => {
+  //   if (!lesson) return;
+  //   setComments(lesson.comments);
+  // }, [lesson]);
 
   const handleAddComment = () => {
     if (newComment.trim() === '') return; // Prevent empty comments
@@ -38,43 +41,64 @@ const Lesson = () => {
   const handleAddReply = () => {};
 
   useEffect(() => {
-    const selectedLesson = coursesData.lessons.find(
-      (lesson) => lesson.lesson_id === parseInt(lessonId),
-    );
-    setLesson(selectedLesson);
-    console.log('selectedLesson');
-    console.log(selectedLesson);
-  }, [lessonId]);
+    const fetchLessons = async () => {
+      try {
+        const data = await getLesson(lessonId);
+        setLesson(data);
+      } catch (error) {
+        console.error('Failed to fetch lessons:', error);
+      }
+    };
 
-  useEffect(() => {
-    if (!lesson) return;
-
-    const selectedInstructor = coursesData.instructors.find(
-      (instructor) => lesson.instructor_id === instructor.id,
-    );
-    setInstructor(selectedInstructor);
-    if (selectedInstructor) {
-      setLoadingInstructor(false);
+    if (course) {
+      fetchLessons();
     }
-    console.log('selectedInstructor', selectedInstructor);
-  }, [lesson]);
+  }, [course, courseId]);
 
   useEffect(() => {
-    const selectedCourse = coursesData.courses.find(
-      (course) => course.course_id === lesson?.course_id,
-    );
-    console.log('selectedCourse');
-    console.log(selectedCourse);
-    setCourse(selectedCourse);
-  }, [lesson]);
-  useEffect(() => {
-    if (!course) return;
-    const selectedLessons = coursesData.lessons.filter((lesson) =>
-      course?.lessons.includes(lesson.lesson_id),
-    );
-    setLessons(selectedLessons);
-  }, [course]);
+    const fetchInstructor = async () => {
+      try {
+        const data = await getInstructorByCourse(courseId);
+        setInstructor(data);
+      } catch (error) {
+        console.error('Failed to fetch instructor:', error);
+      } finally {
+        setLoadingInstructor(false);
+      }
+    };
 
+    if (course) {
+      fetchInstructor();
+    }
+  }, [course, courseId]);
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      try {
+        const data = await getCourse(courseId);
+        setCourse(data);
+      } catch (error) {
+        console.error('Failed to fetch course:', error);
+      }
+    };
+
+    fetchCourse();
+  }, [courseId]);
+
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        const data = await getLessonByCourseID(courseId);
+        setLessons(data);
+      } catch (error) {
+        console.error('Failed to fetch lessons:', error);
+      }
+    };
+
+    if (course) {
+      fetchLessons();
+    }
+  }, [course, courseId]);
   if (!lesson) {
     return <div>Lesson not found</div>;
   }
@@ -83,7 +107,13 @@ const Lesson = () => {
     <div className='px-11 py-10'>
       <div className='flex flex-col lg:flex-row gap-7'>
         <ReactPlayer
-          light={<img src={lesson.thumbnail} alt='Thumbnail' />}
+          light={
+            <img
+              src={lesson.thumbnail ? lesson.thumbnail : '/no-video.png'}
+              alt='Thumbnail'
+              className={lesson.thumbnail ? 'w-full' : ''}
+            />
+          }
           url={'https://www.w3schools.com/html/mov_bbb.mp4'}
           className='react-player'
           playing={false}
@@ -106,12 +136,12 @@ const Lesson = () => {
               <div>loading</div>
             )}
           </div>
-          <p className='w-full lg:text-xl'>{lesson.longDesc}</p>
+          <p className='w-full lg:text-xl'>{lesson.description}</p>
 
           <div className='flex gap-1 items-center'>
             <img src={calendar} alt='' className='w-4 h-4' />
             <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
-              {lesson.date_posted}
+              {lesson.date.split('T')[0]}
             </p>
           </div>
         </div>
@@ -134,7 +164,7 @@ const Lesson = () => {
                     <LessonsDD
                       key={lesson}
                       lesson={lesson}
-                      watching={lesson.lesson_id == lessonId}
+                      watching={lesson.lessonID == lessonId}
                     />
                   </div>
                 );
