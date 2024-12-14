@@ -123,36 +123,38 @@ const Lesson = () => {
   return (
     <div className='px-11 py-10'>
       <div className='flex flex-col lg:flex-row gap-7'>
-        <ReactPlayer
-          light={
-            <img
-              src={lesson.thumbnail ? lesson.thumbnail : '/no-video.png'}
-              alt='Thumbnail'
-              className={lesson.thumbnail ? 'w-full' : ''}
-            />
-          }
-          url={'https://www.w3schools.com/html/mov_bbb.mp4'}
-          className='react-player'
-          playing={false}
-          controls
-          width='100%'
-          height='100%'
-        />
-        <div className='flex justify-between'>
-          {prev != -100 && (
-            <a href={`/course/${courseId}/lesson/${prev}`} className='link'>
-              {'<- Previous Lesson'}
-            </a>
-          )}
-          {next != -100 && (
-            <a href={`/course/${courseId}/lesson/${next}`} className='link'>
-              {'Next Lesson ->'}
-            </a>
-          )}
+        <div className='flex flex-col'>
+          <ReactPlayer
+            light={
+              <img
+                src={lesson.thumbnail ? lesson.thumbnail : '/no-video.png'}
+                alt='Thumbnail'
+                className={lesson.thumbnail ? 'w-full' : ''}
+              />
+            }
+            url={'https://www.w3schools.com/html/mov_bbb.mp4'}
+            className='react-player'
+            playing={false}
+            controls
+            width='100%'
+            height='100%'
+          />
+          <div className='flex justify-between'>
+            {prev != -100 && (
+              <a href={`/course/${courseId}/lesson/${prev}`} className='link'>
+                {'<- Previous Lesson'}
+              </a>
+            )}
+            {next != -100 && (
+              <a href={`/course/${courseId}/lesson/${next}`} className='link'>
+                {'Next Lesson ->'}
+              </a>
+            )}
+          </div>
+          <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
+            Duration: {lesson.duration} mins
+          </p>
         </div>
-        <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
-          Duration: {lesson.duration} mins
-        </p>
         <div className='flex flex-col gap-6 lg:w-1/2'>
           <h3 className='md:text-6xl text-5xl font-bold text-transparent bg-clip-text bg-primary-gradient-reverse py-3'>
             {lesson.title}
