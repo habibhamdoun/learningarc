@@ -21,14 +21,16 @@ const CoursesPart = () => {
         setCourses(data);
       } catch (error) {
         console.error('Failed to fetch courses:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchData();
+    if (courses.length > 0) {
+      setLoading(false);
+    }
+
     // console.log(courses);
-  }, []);
+  }, [courses]);
   // const getCoursesByIds = (courseIds) =>
   //   courseIds.map((id) => courses.find((course) => course.course_id === id));
 

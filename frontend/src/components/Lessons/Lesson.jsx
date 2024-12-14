@@ -16,6 +16,8 @@ const Lesson = () => {
   const [course, setCourse] = useState(null);
   const [lessons, setLessons] = useState([]);
   const [comments, setComments] = useState([]);
+  const [next, setNext] = useState(0);
+  const [prev, setPrev] = useState(0);
   const [newComment, setNewComment] = useState('');
   const [newReply, setNewReply] = useState('');
   const [instructor, setInstructor] = useState(null);
@@ -99,6 +101,28 @@ const Lesson = () => {
       fetchLessons();
     }
   }, [course, courseId]);
+
+  useEffect(() => {
+    const nextLesson = () => {
+      console.log(lessons);
+
+      const idx = lessons.findIndex((lesson) => lesson.lessonID == lessonId);
+      const nextIdx = idx + 1;
+      setNext(nextIdx != lessons.length ? lessons[nextIdx]?.lessonID : -100);
+    };
+    const prevLesson = () => {
+      console.log(lessons);
+
+      const idx = lessons.findIndex((lesson) => lesson.lessonID == lessonId);
+      const prevIdx = idx - 1;
+      setPrev(prevIdx <= -1 ? -100 : lessons[prevIdx]?.lessonID);
+      console.log(prevIdx <= -1 ? -100 : prevIdx);
+    };
+
+    nextLesson();
+    prevLesson();
+  }, [lessons]);
+
   if (!lesson) {
     return <div>Lesson not found</div>;
   }
@@ -121,6 +145,21 @@ const Lesson = () => {
           width='100%'
           height='100%'
         />
+        <div className='flex justify-between'>
+          {prev != -100 && (
+            <a href={`/course/${courseId}/lesson/${prev}`} className='link'>
+              {'<- Previous Lesson'}
+            </a>
+          )}
+          {next != -100 && (
+            <a href={`/course/${courseId}/lesson/${next}`} className='link'>
+              {'Next Lesson ->'}
+            </a>
+          )}
+        </div>
+        <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
+          Duration: {lesson.duration} mins
+        </p>
         <div className='flex flex-col gap-6 lg:w-1/2'>
           <h3 className='md:text-6xl text-5xl font-bold text-transparent bg-clip-text bg-primary-gradient-reverse py-3'>
             {lesson.title}
@@ -144,9 +183,6 @@ const Lesson = () => {
               {lesson.date.split('T')[0]}
             </p>
           </div>
-          <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
-            Duration: {lesson.duration} mins
-          </p>
         </div>
       </div>
       <div className='flex items-baseline gap-3 justify-center flex-col '>
