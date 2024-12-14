@@ -10,7 +10,8 @@ const LessonsDD = ({ lesson, watching }) => {
             {watching && <p className='flex-grow-0 font-bold'>NOW WATCHING</p>}
           </div>
           <p>{lesson.description}</p>
-          <p className='italic'>{lesson.date_posted}</p>
+          <p className='italic'>{lesson.date.split('T')[0]}</p>
+          <p className='italic'>{lesson.duration} mins</p>
           <div className='card-actions justify-end'>
             <a href={`/course/${lesson.courseID}/lesson/${lesson.lessonID}`}>
               <button className='btn text-white btn-secondary'>

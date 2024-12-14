@@ -3,9 +3,9 @@ import calendar from '../../assets/calendarIcon2.svg';
 
 const CourseCard = ({ id, imgSrc, title, desc, instructor, date, width }) => {
   return (
-    <div className={`card bg-base-100 ${width} shadow-xl`}>
-      <figure>
-        <img src={imgSrc} alt='Course' />
+    <div className={`card bg-base-100 ${width} shadow-xl `}>
+      <figure className='h-60 overflow-hidden'>
+        <img src={imgSrc} alt='Course' className='h-full w-full object-cover' />
       </figure>
       <div className='card-body items-center md:items-stretch'>
         <h2 className='card-title md:text-xl text-base '>{title}</h2>
@@ -16,7 +16,7 @@ const CourseCard = ({ id, imgSrc, title, desc, instructor, date, width }) => {
           <div className='flex gap-1 items-center justify-center'>
             <img src={calendar} alt='' className='w-4 h-4 md:block hidden' />
             <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
-              {date}
+              {date.split('T')[0]}
             </p>
           </div>
         </div>

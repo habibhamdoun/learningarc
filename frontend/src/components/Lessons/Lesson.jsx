@@ -121,7 +121,7 @@ const Lesson = () => {
           width='100%'
           height='100%'
         />
-        <div className='flex flex-col gap-10 lg:w-1/2'>
+        <div className='flex flex-col gap-6 lg:w-1/2'>
           <h3 className='md:text-6xl text-5xl font-bold text-transparent bg-clip-text bg-primary-gradient-reverse py-3'>
             {lesson.title}
           </h3>
@@ -144,6 +144,9 @@ const Lesson = () => {
               {lesson.date.split('T')[0]}
             </p>
           </div>
+          <p className='flex-grow-0 opacity-65 md:text-base text-sm'>
+            Duration: {lesson.duration} mins
+          </p>
         </div>
       </div>
       <div className='flex items-baseline gap-3 justify-center flex-col '>
