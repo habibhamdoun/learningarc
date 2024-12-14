@@ -28,7 +28,7 @@ const AboutSection = () => {
           text={'For Instructors'}
           btnText={'Upload Courses'}
           btnClass={'btn-outline border-white text-white'}
-          btnLink={'/dashboard'}
+          btnLink={'/auth'}
         />
         <AboutCard
           imgSrc={stuImg}
