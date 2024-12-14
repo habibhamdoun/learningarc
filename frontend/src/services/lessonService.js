@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const API_URL_LESSON = 'http://localhost:5000/api/lessons'; // Replace with your backend URL
+const API_URL_LESSON = 'http://localhost:5000/api/lessons';
 
-// Lesson Services
 export const getLessons = async () => {
   try {
     const response = await axios.get(`${API_URL_LESSON}`);
