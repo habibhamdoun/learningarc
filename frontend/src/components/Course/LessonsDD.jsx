@@ -25,7 +25,7 @@ const LessonsDD = ({ lesson, watching }) => {
   );
 };
 LessonsDD.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   lesson: PropTypes.object.isRequired,
   watching: PropTypes.bool.isRequired,
 };
