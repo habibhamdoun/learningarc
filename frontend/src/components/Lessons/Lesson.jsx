@@ -7,7 +7,10 @@ import ReactPlayer from 'react-player';
 import { getLesson, getLessonByCourseID } from '../../services/lessonService';
 import { getInstructorByCourse } from '../../services/instructorService';
 import { getCourse } from '../../services/courseService';
-import { getCommentByLessonID } from '../../services/commentService';
+import {
+  addComment,
+  getCommentByLessonID,
+} from '../../services/commentService';
 
 const Lesson = () => {
   const { lessonId } = useParams();
@@ -20,6 +23,7 @@ const Lesson = () => {
   const [next, setNext] = useState(0);
   const [prev, setPrev] = useState(0);
   const [newComment, setNewComment] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [instructor, setInstructor] = useState(null);
   const [loadingInstructor, setLoadingInstructor] = useState(true);
 
@@ -116,6 +120,39 @@ const Lesson = () => {
     prevLesson();
   }, [lessons]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('handleSubmit triggered');
+
+    const commentData = {
+      lessonID: parseInt(lessonId),
+      studentID: 1,
+      content: newComment,
+      courseID: parseInt(courseId),
+      commenter: 'Habib',
+    };
+
+    console.log('Prepared Comment Data:', commentData);
+
+    if (!newComment) {
+      console.log('Comment content is empty');
+      setErrorMessage('Comment cannot be empty.');
+      return;
+    }
+
+    try {
+      console.log('Before calling addComment');
+      const result = await addComment(commentData);
+      console.log('After calling addComment', result);
+      setErrorMessage('Comment added successfully!');
+      setComments((prevComments) => [...prevComments, result.comment]);
+      setNewComment('');
+    } catch (error) {
+      console.error('Error in handleSubmit:', error);
+      setErrorMessage('Failed to add comment.');
+    }
+  };
+
   if (!lesson) {
     return <div>Lesson not found</div>;
   }
@@ -194,7 +231,7 @@ const Lesson = () => {
             ) : (
               lessons.map((lesson) => {
                 return (
-                  <div key={lesson} className='px-4'>
+                  <div key={lesson.lessonID} className='px-4'>
                     <LessonsDD
                       key={lesson}
                       lesson={lesson}
@@ -242,9 +279,14 @@ const Lesson = () => {
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
             />
-            <button className='px-3 text-xs bg-primary text-white rounded-md hover:bg-blue-600 transition-colors duration-300'>
+            <button
+              type='button'
+              onClick={handleSubmit}
+              className='px-3 text-xs bg-primary text-white rounded-md hover:bg-blue-600 transition-colors duration-300'
+            >
               Comment
             </button>
+            {errorMessage && <p>{errorMessage}</p>}
           </div>
         </div>
       </div>

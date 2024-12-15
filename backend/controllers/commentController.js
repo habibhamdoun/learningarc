@@ -29,28 +29,47 @@ export const getCommentByLessonID = (req, res) => {
 };
 
 export const addComment = (req, res) => {
-  const { commentID, lessonID, studentID, content, datePosted } = req.body;
+  console.log('Received Payload:', req.body); // Log req.body for debugging
 
-  if (!lessonID || !commentID || !content) {
-    return res
-      .status(400)
-      .json({ error: 'commentID, lessonID, and content are required' });
+  const { lessonID, studentID, content, courseID, commenter } = req.body;
+
+  if (!lessonID || !studentID || !content || !courseID || !commenter) {
+    return res.status(400).json({
+      error:
+        'lessonID, studentID, content, courseID, and commenter are required',
+    });
   }
 
-  const query =
-    'INSERT INTO Comment (commentID, lessonID, studentID, content, datePosted) VALUES (?, ?, ?, ?, ?)';
-  const values = [commentID, lessonID, studentID, content, datePosted];
+  const query = `
+      INSERT INTO comment (lessonID, studentID, content, courseID, commenter, datePosted)
+      VALUES (?, ?, ?, ?, ?, ?)
+  `;
+  const values = [
+    lessonID,
+    studentID,
+    content,
+    courseID,
+    commenter,
+    new Date(),
+  ];
 
-  db.query(query, values, (err, result) => {
+  db.query(query, values, (err, results) => {
     if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Failed to add Comment' });
-    } else {
-      res.status(201).json({
-        message: 'Comment added successfully',
-        lessonID: result.insertId,
-      });
+      console.error('Database Error:', err);
+      return res.status(500).json({ error: 'Database error occurred' });
     }
+    res.status(201).json({
+      message: 'Comment added successfully!',
+      comment: {
+        id: results.insertId,
+        lessonID,
+        studentID,
+        content,
+        courseID,
+        commenter,
+        datePosted: new Date(),
+      },
+    });
   });
 };
 

@@ -60,8 +60,8 @@ const Profile = ({ name, pic, description, small }) => {
 
 Profile.propTypes = {
   name: PropTypes.string.isRequired,
-  pic: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  pic: PropTypes.string,
+  description: PropTypes.string,
   small: PropTypes.bool,
 };
 export default Profile;
