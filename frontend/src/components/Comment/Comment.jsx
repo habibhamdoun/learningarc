@@ -8,6 +8,21 @@ const Comment = ({ comment }) => {
   const [replies, setReplies] = useState([]);
   const [newReply, setNewReply] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const formatTimeTo12Hour = (dateTime) => {
+    if (!dateTime) return '';
+
+    const date = new Date(dateTime);
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12 || 12;
+
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+
+    return `${hours}:${formattedMinutes} ${amPm}`;
+  };
   useEffect(() => {
     const fetchReplies = async () => {
       try {
@@ -64,7 +79,17 @@ const Comment = ({ comment }) => {
       key={comment.commentID}
       className='p-4 bg-gray-100 rounded-md shadow-md'
     >
-      <Profile name={comment.commenter} small={true} />
+      <div className='flex justify-between'>
+        <div>
+          <Profile name={comment.commenter} small={true} />
+          <p className='text-gray-500 italic'>
+            {formatTimeTo12Hour(comment.datePosted)}
+          </p>
+        </div>
+        <p className='text-gray-500 italic'>
+          {comment.datePosted.split('T')[0]}
+        </p>
+      </div>
       <p className='mt-2'>{comment.content}</p>
       <div className='flex gap-2 mt-3'>
         <input

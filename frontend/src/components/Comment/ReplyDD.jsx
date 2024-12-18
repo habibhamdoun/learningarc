@@ -7,11 +7,29 @@ const ReplyDD = ({ replies }) => {
   const loadMoreReplies = () => {
     setVisibleReplies((prev) => prev + 3);
   };
+  const formatTimeTo12Hour = (dateTime) => {
+    if (!dateTime) return '';
+
+    const date = new Date(dateTime);
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12 || 12;
+
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+
+    return `${hours}:${formattedMinutes} ${amPm}`;
+  };
 
   return (
     <div className='mt-4'>
       <div className='dropdown dropdown-hover'>
-        <div tabIndex={0} role='button' className='btn btn-sm btn-outline'>
+        <div
+          tabIndex={0}
+          role='button'
+          className='btn btn-sm btn-outline btn-primary'
+        >
           View Replies
         </div>
         <ul
@@ -25,6 +43,14 @@ const ReplyDD = ({ replies }) => {
                   <span className='font-bold'>{reply.commenter}:</span>{' '}
                   {reply.content}
                 </p>
+                <div className='flex justify-end gap-2'>
+                  <p className='text-gray-500'>
+                    {reply.datePosted.split('T')[0]}
+                  </p>
+                  <p className='text-gray-500'>
+                    {formatTimeTo12Hour(reply.datePosted)}
+                  </p>
+                </div>
               </li>
             ))
           ) : (
