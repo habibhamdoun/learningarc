@@ -8,6 +8,7 @@ import courseRoutes from './routes/courseRoutes.js';
 import lessonRoutes from './routes/lessonRoutes.js';
 import instructorRoutes from './routes/instructorRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
+import replyRoutes from './routes/replyRoutes.js';
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/lessons', lessonRoutes);
 app.use('/api/instructors', instructorRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/replies', replyRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
