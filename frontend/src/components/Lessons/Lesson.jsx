@@ -11,6 +11,7 @@ import {
   addComment,
   getCommentByLessonID,
 } from '../../services/commentService';
+import Comment from '../Comment/Comment';
 
 const Lesson = () => {
   const { lessonId } = useParams();
@@ -26,8 +27,6 @@ const Lesson = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [instructor, setInstructor] = useState(null);
   const [loadingInstructor, setLoadingInstructor] = useState(true);
-
-  //TODO:CHANGE THE COMMENT retreiving and ADDING + reply
 
   useEffect(() => {
     const fetchLessons = async () => {
@@ -248,24 +247,7 @@ const Lesson = () => {
           <div className='flex flex-col gap-4 mb-6'>
             {comments.length > 0 ? (
               comments.map((comment) => (
-                <div
-                  key={comment.commentID}
-                  className='p-4 bg-gray-100 rounded-md shadow-md'
-                >
-                  <Profile name={comment.commenter} small={true} />
-                  <p className='mt-2'>{comment.content}</p>
-
-                  <div className='flex gap-2 mt-3'>
-                    <input
-                      type='text'
-                      placeholder='Add Reply'
-                      className='input input-bordered input-primary text-sm'
-                    />
-                    <button className='px-2 py-2 text-xs bg-primary text-white rounded-md hover:bg-blue-600 transition-colors duration-300'>
-                      Reply
-                    </button>
-                  </div>
-                </div>
+                <Comment key={comment.commentID} comment={comment} />
               ))
             ) : (
               <p>No comments yet. Be the first to comment!</p>

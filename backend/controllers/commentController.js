@@ -29,7 +29,7 @@ export const getCommentByLessonID = (req, res) => {
 };
 
 export const addComment = (req, res) => {
-  console.log('Received Payload:', req.body); // Log req.body for debugging
+  console.log('Received Payload:', req.body);
 
   const { lessonID, studentID, content, courseID, commenter } = req.body;
 
