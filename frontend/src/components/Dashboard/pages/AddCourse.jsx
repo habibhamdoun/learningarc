@@ -1,18 +1,21 @@
 import { useState } from "react";
 import SideBar from "../SideBar";
 import AddLesson from "./AddLesson";
+import axios from "axios";
 
 const AddCourse = () => {
   const [courseData, setCourseData] = useState({
-    courseId: "",
     title: "",
     description: "",
     duration: "",
     rating: "",
     dateCreated: "",
+    thumbnail: "",
     lessons: [],
   });
+
   const [isLessonDropdownOpen, setIsLessonDropdownOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,9 +37,38 @@ const AddCourse = () => {
     setIsLessonDropdownOpen((prev) => !prev);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Course Submitted", courseData);
+
+    // Validate lessons
+    if (courseData.lessons.length === 0) {
+      alert("Please add at least one lesson before submitting the course.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await axios.post("/api/courses/add", courseData);
+      alert("Course submitted successfully!");
+      console.log("Response:", response.data);
+
+      // Reset form
+      setCourseData({
+        title: "",
+        description: "",
+        duration: "",
+        rating: "",
+        dateCreated: "",
+        thumbnail: "",
+        lessons: [],
+      });
+    } catch (error) {
+      console.error("Error submitting course:", error);
+      alert("Failed to submit the course. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -44,19 +76,6 @@ const AddCourse = () => {
       <SideBar />
       <div className="p-6 bg-white rounded-md max-w-4xl mx-auto ml-6 mb-10">
         <form className="space-y-5" onSubmit={handleSubmit}>
-          <div>
-            <label className="text-sm text-gray-600">Course ID</label>
-            <input
-              type="text"
-              name="courseId"
-              className="w-full mt-1 p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              value={courseData.courseId}
-              onChange={handleChange}
-              placeholder="Enter course ID"
-              required
-            />
-          </div>
-
           <div>
             <label className="text-sm text-gray-600">Title</label>
             <input
@@ -82,6 +101,7 @@ const AddCourse = () => {
               required
             ></textarea>
           </div>
+
           <div>
             <label className="text-sm text-gray-600">Date Created</label>
             <input
@@ -90,6 +110,19 @@ const AddCourse = () => {
               className="w-full mt-1 p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
               value={courseData.dateCreated}
               onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="text-sm text-gray-600">Thumbnail URL</label>
+            <input
+              type="text"
+              name="thumbnail"
+              className="w-full mt-1 p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              value={courseData.thumbnail}
+              onChange={handleChange}
+              placeholder="Enter thumbnail URL"
               required
             />
           </div>
@@ -143,8 +176,9 @@ const AddCourse = () => {
             <button
               type="submit"
               className="px-6 py-2 bg-primary text-white font-medium rounded-md hover:bg-blue-600 transition"
+              disabled={isSubmitting}
             >
-              Publish Course
+              {isSubmitting ? "Submitting..." : "Publish Course"}
             </button>
           </div>
         </form>
