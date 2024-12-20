@@ -1,25 +1,41 @@
 import { useEffect, useState } from 'react';
 import CoursesCarousel from './CoursesCarousel';
-import coursesData from '../../../data.json';
+// import coursesData from '../../../data.json';
+import { getCourses } from '../../services/courseService';
 import CourseLoading from './CourseLoading';
+
 const CoursesPart = () => {
-  const [courses, setCourses] = useState(coursesData.courses);
-  const [users, setUsers] = useState(coursesData.users);
+  const [courses, setCourses] = useState([]);
+  // const [users, setUsers] = useState(coursesData.users);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState('Everything');
+
+  // useEffect(() => {
+  //   setUsers(coursesData.users);
+  // }, []);
+
   useEffect(() => {
-    setTimeout(() => {
-      setCourses(coursesData.courses);
-      setUsers(coursesData.users);
+    const fetchData = async () => {
+      try {
+        const data = await getCourses();
+        setCourses(data);
+      } catch (error) {
+        console.error('Failed to fetch courses:', error);
+      }
+    };
+
+    fetchData();
+    if (courses.length > 0) {
       setLoading(false);
-    }, 2000);
-  }, []);
-  //TODO: add loading until loading
-  const getCoursesByIds = (courseIds) =>
-    courseIds.map((id) => courses.find((course) => course.course_id === id));
+    }
+
+    // console.log(courses);
+  }, [courses]);
+  // const getCoursesByIds = (courseIds) =>
+  //   courseIds.map((id) => courses.find((course) => course.course_id === id));
 
   // Assume the first user is logged in
-  const loggedInUser = users.find((user) => user.user_id === 1);
+  // const loggedInUser = users.find((user) => user.user_id === 1);
 
   return (
     <div>
@@ -69,14 +85,14 @@ const CoursesPart = () => {
               <h2 className='px-11 text-primary font-semibold text-3xl md:text-3xl py-3'>
                 Your Playlists
               </h2>
-              {loggedInUser?.playlists.map((playlist) => (
+              {/* {loggedInUser?.playlists.map((playlist) => (
                 <CoursesCarousel
                   key={playlist.playlist_id}
                   title={playlist.name}
                   coursesData={getCoursesByIds(playlist.courses)}
                   width='w-[250px] md:w-[374px]'
                 />
-              ))}
+              ))} */}
             </div>
           )}
         </>

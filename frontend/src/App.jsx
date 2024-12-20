@@ -36,17 +36,17 @@ function App() {
 document.documentElement.setAttribute('data-theme', 'mytheme');
 export default App;
 // import { useEffect, useState } from 'react';
-// import { getStudents } from './services/studentService';
+// import { getCourses } from './services/courseService';
 
 // const App = () => {
-//   const [students, setStudents] = useState([]);
+//   const [courses, setCourses] = useState([]);
 //   const [loading, setLoading] = useState(true);
 
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
-//         const data = await getStudents();
-//         setStudents(data);
+//         const data = await getCourses();
+//         setCourses(data);
 //       } catch (error) {
 //         console.error('Failed to fetch students:', error);
 //       } finally {
@@ -55,16 +55,17 @@ export default App;
 //     };
 
 //     fetchData();
+//     console.log(courses);
 //   }, []);
 
 //   if (loading) return <div>Loading...</div>;
 
 //   return (
 //     <div>
-//       <h1>Students</h1>
+//       <h1>Courses</h1>
 //       <ul>
-//         {students.map((student) => (
-//           <li key={student.studentID}>{student.email}</li>
+//         {courses.map((course) => (
+//           <li key={course.courseId}>{course.title}</li>
 //         ))}
 //       </ul>
 //     </div>

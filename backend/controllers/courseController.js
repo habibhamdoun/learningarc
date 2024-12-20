@@ -1,5 +1,25 @@
 import db from '../models/db.js';
 
+export const getCourse = (req, res) => {
+  const { courseID } = req.params;
+
+  if (!courseID) {
+    return res.status(400).json({ error: 'CourseID is required' });
+  }
+
+  const query = 'SELECT * FROM Course WHERE courseID = ?';
+  db.query(query, [courseID], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to fetch course' });
+    } else if (results.length === 0) {
+      res.status(404).json({ error: 'Course not found' });
+    } else {
+      res.json(results[0]);
+    }
+  });
+};
+
 export const getCourses = (req, res) => {
   const query = 'SELECT * FROM Course';
   db.query(query, (err, results) => {
@@ -35,7 +55,7 @@ export const addCourse = (req, res) => {
     } else {
       res.status(201).json({
         message: 'Course added successfully',
-        courseID: result.insertId, 
+       courseID: result.insertId, 
       });
     }
   });

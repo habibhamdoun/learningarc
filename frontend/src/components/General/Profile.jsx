@@ -36,7 +36,7 @@ const Profile = ({ name, pic, description, small }) => {
       ) : (
         <div
           className={`avatar placeholder lg:w-20 w-44 ${
-            small ? 'min-w-10' : 'min-w-28'
+            small ? 'max-w-10' : 'max-w-28'
           }`}
         >
           <div
@@ -60,8 +60,8 @@ const Profile = ({ name, pic, description, small }) => {
 
 Profile.propTypes = {
   name: PropTypes.string.isRequired,
-  pic: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  pic: PropTypes.string,
+  description: PropTypes.string,
   small: PropTypes.bool,
 };
 export default Profile;
