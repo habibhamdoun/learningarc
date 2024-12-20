@@ -10,9 +10,10 @@ const LessonsDD = ({ lesson, watching }) => {
             {watching && <p className='flex-grow-0 font-bold'>NOW WATCHING</p>}
           </div>
           <p>{lesson.description}</p>
-          <p className='italic'>{lesson.date_posted}</p>
+          <p className='italic'>{lesson.date.split('T')[0]}</p>
+          <p className='italic'>{lesson.duration} mins</p>
           <div className='card-actions justify-end'>
-            <a href={`/course/${lesson.course_id}/lesson/${lesson.lesson_id}`}>
+            <a href={`/course/${lesson.courseID}/lesson/${lesson.lessonID}`}>
               <button className='btn text-white btn-secondary'>
                 Check Out
               </button>
@@ -24,7 +25,7 @@ const LessonsDD = ({ lesson, watching }) => {
   );
 };
 LessonsDD.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   lesson: PropTypes.object.isRequired,
   watching: PropTypes.bool.isRequired,
 };

@@ -1,6 +1,5 @@
-import React from "react";
-import NavBar from "./NavBar";
-import SideBar from "./SideBar";
+import NavBar from './NavBar';
+import SideBar from './SideBar';
 
 const AdminPage = () => {
   return (

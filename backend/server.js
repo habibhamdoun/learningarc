@@ -6,18 +6,21 @@ import dotenv from 'dotenv';
 import studentRoutes from './routes/studentRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import lessonRoutes from './routes/lessonRoutes.js';
+import instructorRoutes from './routes/instructorRoutes.js';
+import commentRoutes from './routes/commentRoutes.js';
+import replyRoutes from './routes/replyRoutes.js';
+
 
 dotenv.config();
 
-// Create an Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Database connection
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -34,6 +37,7 @@ db.connect((err) => {
   console.log('Connected to the MySQL database');
 });
 
+
 app.locals.db = db;
 
 app.get('/', (req, res) => {
@@ -44,9 +48,12 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 
 app.use('/api/students', studentRoutes);
-app.use('/api/course', courseRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/lessons', lessonRoutes);
+app.use('/api/instructors', instructorRoutes);
+app.use('/api/comments', commentRoutes);
+app.use('/api/replies', replyRoutes);
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -14,7 +14,7 @@ const CoursesCarousel = ({ title, coursesData, width }) => {
     };
 
     fetchData();
-    console.log(courses);
+    // console.log(courses);
   }, [coursesData]);
 
   const scrollCarousel = (direction) => {
