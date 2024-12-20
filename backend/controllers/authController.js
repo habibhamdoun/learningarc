@@ -52,11 +52,13 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Validate required fields
     if (!email || !password) {
       return res.status(400).json({ error: "Email and password are required" });
     }
 
-    let user = await new Promise((resolve, reject) => {
+    // Check if user exists in the database
+    const user = await new Promise((resolve, reject) => {
       const query = "SELECT * FROM User WHERE email = ?";
       db.query(query, [email], (err, results) => {
         if (err) return reject(err);
@@ -64,37 +66,20 @@ export const login = async (req, res) => {
       });
     });
 
+    // If user does not exist, return an error
     if (!user) {
-      const defaultRole = "STUDENT";
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      const insertQuery =
-        "INSERT INTO User (email, username, password, role) VALUES (?, ?, ?, ?)";
-      await new Promise((resolve, reject) => {
-        db.query(
-          insertQuery,
-          [email, email.split("@")[0], hashedPassword, defaultRole],
-          (err, results) => {
-            if (err) return reject(err);
-            resolve(results);
-          }
-        );
-      });
-
-      user = await new Promise((resolve, reject) => {
-        const query = "SELECT * FROM User WHERE email = ?";
-        db.query(query, [email], (err, results) => {
-          if (err) return reject(err);
-          resolve(results[0]);
-        });
+      return res.status(404).json({
+        error: "User not found. Please register first.",
       });
     }
 
+    // Validate the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
+    // Generate a JWT token
     const token = jwt.sign(
       { id: user.userID, email: user.email, role: user.role },
       SECRET_KEY,
@@ -107,6 +92,7 @@ export const login = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
 
 export const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"]?.split(" ")[1];
