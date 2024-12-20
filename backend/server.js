@@ -10,7 +10,7 @@ import lessonRoutes from './routes/lessonRoutes.js';
 import instructorRoutes from './routes/instructorRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 import replyRoutes from './routes/replyRoutes.js';
-
+import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
 
@@ -37,13 +37,11 @@ db.connect((err) => {
   console.log('Connected to the MySQL database');
 });
 
-
 app.locals.db = db;
 
 app.get('/', (req, res) => {
   res.send('API is running');
 });
-
 
 app.use('/api/auth', authRoutes);
 
@@ -53,6 +51,7 @@ app.use('/api/lessons', lessonRoutes);
 app.use('/api/instructors', instructorRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/replies', replyRoutes);
+app.use('/api/videos', uploadRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
