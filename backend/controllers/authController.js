@@ -10,10 +10,12 @@ export const register = async (req, res) => {
   try {
     const { email, username, password, role } = req.body;
 
+    // Validate required fields
     if (!email || !username || !password || !role) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
+    // Check if the user already exists
     const existingUser = await new Promise((resolve, reject) => {
       const query = "SELECT * FROM User WHERE email = ?";
       db.query(query, [email], (err, results) => {
@@ -26,8 +28,10 @@ export const register = async (req, res) => {
       return res.status(400).json({ error: "User already exists" });
     }
 
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Insert new user into the database
     const insertQuery =
       "INSERT INTO User (email, username, password, role) VALUES (?, ?, ?, ?)";
     await new Promise((resolve, reject) => {
@@ -49,22 +53,6 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  
-    try {
-      const { email, password } = req.body;
-  
-      // Validate required fields
-      if (!email || !password) {
-        return res.status(400).json({ error: "Email and password are required" });
-      }
-  
-      // Check if user exists in the database
-      const user = await new Promise((resolve, reject) => {
-        const query = "SELECT * FROM User WHERE email = ?";
-        db.query(query, [email], (err, results) => {
-          if (err) return reject(err);
-          resolve(results[0]);
-        });
   try {
     const { email, password } = req.body;
 
@@ -87,50 +75,8 @@ export const login = async (req, res) => {
       return res.status(404).json({
         error: "User not found. Please register first.",
       });
-  
-      // If user does not exist, return an error
-      if (!user) {
-        return res.status(404).json({
-          error: "User not found. Please register first.",
-        });
-      }
-  
-      // Validate the password
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-        return res.status(401).json({ error: "Invalid credentials" });
-      }
-  
-      // Generate a JWT token
-      const token = jwt.sign(
-        { id: user.userID, email: user.email, role: user.role },
-        SECRET_KEY,
-        { expiresIn: "1h" }
-      );
-  
-      res.status(200).json({ message: "Login successful", token });
-    } catch (error) {
-      console.error("Error during login:", error);
-      res.status(500).json({ error: "Server error" });
     }
-  };
 
-  export const verifyToken = (req, res, next) => {
-    const token = req.headers["authorization"]?.split(" ")[1];
-  
-    if (!token) {
-      return res.status(401).json({ error: "No token provided" });
-    }
-  
-    try {
-      const decoded = jwt.verify(token, SECRET_KEY);
-      req.user = decoded;
-      next();
-    } catch (error) {
-      res.status(401).json({ error: "Invalid token" });
-    }
-  };
-  
     // Validate the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
@@ -151,7 +97,6 @@ export const login = async (req, res) => {
   }
 };
 
-
 export const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"]?.split(" ")[1];
 
@@ -161,7 +106,7 @@ export const verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    req.user = decoded;
+    req.user = decoded; // Attach user info to the request
     next();
   } catch (error) {
     res.status(401).json({ error: "Invalid token" });
