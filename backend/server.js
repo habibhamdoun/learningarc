@@ -5,10 +5,12 @@ import mysql from 'mysql2';
 import dotenv from 'dotenv';
 import studentRoutes from './routes/studentRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 import lessonRoutes from './routes/lessonRoutes.js';
 import instructorRoutes from './routes/instructorRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 import replyRoutes from './routes/replyRoutes.js';
+
 
 dotenv.config();
 
@@ -35,9 +37,15 @@ db.connect((err) => {
   console.log('Connected to the MySQL database');
 });
 
+
+app.locals.db = db;
+
 app.get('/', (req, res) => {
   res.send('API is running');
 });
+
+
+app.use('/api/auth', authRoutes);
 
 app.use('/api/students', studentRoutes);
 app.use('/api/courses', courseRoutes);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api'; // Replace with your backend URL
+const API_URL = 'http://localhost:5000/api'; 
 
 export const getStudents = async () => {
   try {
@@ -12,7 +12,6 @@ export const getStudents = async () => {
   }
 };
 
-// Add a new student
 export const addStudent = async (studentData) => {
   try {
     const response = await axios.post(`${API_URL}/students`, studentData);
