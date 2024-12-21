@@ -12,11 +12,14 @@ import AdminPage from './components/Dashboard/AdminPage';
 import Lesson from './components/Lessons/Lesson.jsx';
 import AddCourseForm from './components/AddCourseForm.jsx';
 import AddLesson from './components/AddLesson.jsx';
+// import LogoutBtn from './components/General/LogoutBtn.jsx';
+import User from './components/General/User.jsx';
 
 function App() {
   return (
     <div>
       <Nav />
+      <User />
       <Routes>
         <Route path={`/`} element={<Navigate to='/home' replace />} />
         <Route path={`/home`} element={<HomePage />} />
@@ -30,6 +33,7 @@ function App() {
         <Route path='/admin/add' element={<AddCourseForm />} />
         <Route path='/admin/lessons/add' element={<AddLesson />} />
       </Routes>
+      {/* <LogoutBtn /> */}
       <Footer />
     </div>
   );

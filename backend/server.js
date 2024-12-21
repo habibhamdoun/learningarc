@@ -3,7 +3,6 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mysql from 'mysql2';
 import dotenv from 'dotenv';
-import studentRoutes from './routes/studentRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import lessonRoutes from './routes/lessonRoutes.js';
@@ -11,6 +10,7 @@ import instructorRoutes from './routes/instructorRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 import replyRoutes from './routes/replyRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 
@@ -47,6 +47,7 @@ app.use('/api/auth', authRoutes);
 
 app.use('/api/courses', courseRoutes);
 app.use('/api/lessons', lessonRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/instructors', instructorRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/replies', replyRoutes);
