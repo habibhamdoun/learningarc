@@ -30,7 +30,7 @@ const User = () => {
       } catch (err) {
         console.log(err);
 
-        setError('Failed to fetch user data. Please try again.');
+        setError('You are not logged in');
       } finally {
         setLoading(false);
       }
@@ -46,7 +46,7 @@ const User = () => {
   }
 
   if (error) {
-    return <div className='error'>{error}</div>;
+    return <div className=' bg-primary error'>{error}</div>;
   }
 
   return (
