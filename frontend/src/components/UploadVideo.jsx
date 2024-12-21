@@ -1,107 +1,74 @@
-import { useState } from 'react';
-import { addVideo } from '../services/uploadService';
+import React, { useState } from 'react';
+import { addVideo } from '../services/uploadService'; // Import Axios service
+import { toast } from 'react-toastify'; // For notifications
 
 const UploadVideo = () => {
-  const [formData, setFormData] = useState({
-    description: '',
-    date: '',
-    category: '',
-  });
-  const [file, setFile] = useState(null);
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+  const [category, setCategory] = useState('');
+  const [file, setFile] = useState(null); // File state
 
-  // Handle form input changes
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // Handle file input change
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    setFile(e.target.files[0]); // Update file state
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!file) {
-      setMessage('Please select a file.');
+    if (!description || !date || !category || !file) {
+      toast.error('All fields are required');
       return;
     }
 
-    const uploadData = new FormData();
-    uploadData.append('description', formData.description);
-    uploadData.append('date', formData.date);
-    uploadData.append('category', formData.category);
-    uploadData.append('image', file); // The field name "image" must match the backend
-
-    setLoading(true);
-    setMessage('');
+    const formData = new FormData();
+    formData.append('description', description);
+    formData.append('date', date);
+    formData.append('category', category);
+    formData.append('file', file); // Append file
 
     try {
-      const response = await addVideo(uploadData); // Call the Axios service
-      setMessage(response.message);
+      const response = await addVideo(formData); // Call Axios service
+      toast.success(response.message); // Show success message
     } catch (error) {
-      setMessage('Error uploading video.');
-      console.log(error);
-    } finally {
-      setLoading(false);
+      toast.error(error.response?.data?.error || 'Upload failed'); // Show error message
     }
   };
 
   return (
-    <div className='upload-video'>
-      <h2>Upload Video</h2>
-      <form onSubmit={handleSubmit}>
-        <div className='form-group'>
-          <label>Description:</label>
-          <input
-            type='text'
-            name='description'
-            value={formData.description}
-            onChange={handleInputChange}
-            placeholder='Enter video description'
-            required
-          />
-        </div>
-        <div className='form-group'>
-          <label>Date:</label>
-          <input
-            type='date'
-            name='date'
-            value={formData.date}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className='form-group'>
-          <label>Category:</label>
-          <input
-            type='text'
-            name='category'
-            value={formData.category}
-            onChange={handleInputChange}
-            placeholder='Enter category'
-            required
-          />
-        </div>
-        <div className='form-group'>
-          <label>Video File:</label>
-          <input
-            type='file'
-            name='image'
-            accept='video/*'
-            onChange={handleFileChange}
-            required
-          />
-        </div>
-        <button type='submit' disabled={loading}>
-          {loading ? 'Uploading...' : 'Upload'}
-        </button>
-      </form>
-      {message && <p className='message'>{message}</p>}
-    </div>
+    <form onSubmit={handleSubmit} className='upload-form'>
+      <div>
+        <label>Description:</label>
+        <input
+          type='text'
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label>Date:</label>
+        <input
+          type='date'
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label>Category:</label>
+        <input
+          type='text'
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label>File:</label>
+        <input type='file' onChange={handleFileChange} required />
+      </div>
+      <button type='submit'>Upload Video</button>
+    </form>
   );
 };
 

@@ -16,7 +16,6 @@ export const register = async (req, res) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    // Check if user already exists
     const existingUser = await new Promise((resolve, reject) => {
       const query = "SELECT * FROM User WHERE email = ?";
       db.query(query, [email], (err, results) => {
@@ -77,9 +76,11 @@ export const login = async (req, res) => {
 
     // If user does not exist, return an error
     if (!user) {
+
       return res
         .status(404)
         .json({ error: "User not found. Please register first." });
+
     }
 
     // Validate the password
@@ -107,7 +108,7 @@ export const login = async (req, res) => {
   }
 };
 
-// Middleware to verify token
+
 export const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"]?.split(" ")[1];
 

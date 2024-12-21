@@ -41,18 +41,6 @@ export const getLesson = (req, res) => {
   });
 };
 
-export const getLessons = (req, res) => {
-  const query = 'SELECT * FROM Lesson';
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Failed to fetch lessons' });
-    } else {
-      res.json(results);
-    }
-  });
-};
-
 export const addLesson = (req, res) => {
   const { courseID, title, description, duration } = req.body;
 
