@@ -4,13 +4,12 @@ import {
   removeLesson,
   getLesson,
   getLessonByCourseID,
-  getLessons,
 } from '../controllers/lessonController.js';
 
 const router = express.Router();
 
 // Route to get all lessons
-router.get('/', getLessons);
+// router.get('/', getLessons);
 
 // Route to get lessons by courseID
 router.get('/course/:courseID', getLessonByCourseID);
