@@ -21,6 +21,9 @@ export const getCommentByLessonID = async (courseID, lessonID) => {
 console.log('commentService loaded');
 
 export const addComment = async (commentData) => {
+  console.log('commentData');
+  console.log(commentData);
+
   try {
     console.log('Sending Comment Data:', commentData);
     const response = await axios.post(

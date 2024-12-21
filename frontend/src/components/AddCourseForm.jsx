@@ -1,8 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SideBar from './Dashboard/SideBar';
 
 const AddCourseForm = () => {
+  const [thumbnailState, setThumbnailState] = useState('');
+
+  function getRandomLink() {
+    const links = [
+      'https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg',
+      'https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg',
+      'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg',
+    ];
+    if (links.length === 0) {
+      throw new Error('No links available');
+    }
+    const randomIndex = Math.floor(Math.random() * links.length);
+    return links[randomIndex];
+  }
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -12,6 +28,20 @@ const AddCourseForm = () => {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+
+  // Generate a random thumbnail on component mount
+  useEffect(() => {
+    const thumb = getRandomLink();
+    setThumbnailState(thumb);
+  }, []);
+
+  // Update formData.thumbnail whenever thumbnailState changes
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      thumbnail: thumbnailState,
+    }));
+  }, [thumbnailState]);
 
   const handleCourseChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +57,6 @@ const AddCourseForm = () => {
     setMessage('');
 
     try {
-      // Add token if required (e.g., for logged-in teachers)
       const token = localStorage.getItem('token');
       const config = {
         headers: {
@@ -50,7 +79,7 @@ const AddCourseForm = () => {
         title: '',
         description: '',
         duration: '',
-        thumbnail: '',
+        thumbnail: thumbnailState,
       });
     } catch (error) {
       const errorMessage =
@@ -123,21 +152,7 @@ const AddCourseForm = () => {
               required
             />
           </div>
-          <div>
-            <label htmlFor='thumbnail' className='block font-medium'>
-              Thumbnail URL
-            </label>
-            <input
-              type='url'
-              id='thumbnail'
-              name='thumbnail'
-              value={formData.thumbnail}
-              onChange={handleCourseChange}
-              className='w-full mt-2 p-3 border rounded-md bg-white'
-              placeholder='Enter thumbnail URL'
-              required
-            />
-          </div>
+
           <button
             type='submit'
             className={`w-full p-3 text-white font-bold rounded-md ${

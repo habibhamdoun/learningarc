@@ -36,18 +36,24 @@ export const getCoursesByTeacher = (req, res) => {
   const userID = req.user?.id; // Extract userID from the authenticated user's token
 
   if (!userID) {
-    return res.status(403).json({ error: 'Unauthorized: Teacher not logged in' });
+    return res
+      .status(403)
+      .json({ error: 'Unauthorized: Teacher not logged in' });
   }
 
   const query = 'SELECT * FROM Course WHERE userID = ?';
   db.query(query, [userID], (err, results) => {
     if (err) {
       console.error('Error fetching courses for the teacher:', err);
-      return res.status(500).json({ error: 'Failed to fetch courses for the teacher' });
+      return res
+        .status(500)
+        .json({ error: 'Failed to fetch courses for the teacher' });
     }
 
     if (results.length === 0) {
-      return res.status(404).json({ error: 'No courses found for the teacher' });
+      return res
+        .status(404)
+        .json({ error: 'No courses found for the teacher' });
     }
 
     res.status(200).json(results);
@@ -58,14 +64,17 @@ export const addCourse = (req, res) => {
   const { title, description, duration, thumbnail } = req.body;
   const userID = req.user?.id;
 
-  console.log('Adding course for user:', userID); // Debugging
+  console.log('req.body');
+  console.log(req.body);
 
   if (!title || !description || !duration || !thumbnail) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
   if (!userID) {
-    return res.status(403).json({ error: 'Unauthorized: Teacher not logged in' });
+    return res
+      .status(403)
+      .json({ error: 'Unauthorized: Teacher not logged in' });
   }
 
   const query =
@@ -85,7 +94,6 @@ export const addCourse = (req, res) => {
     }
   });
 };
-
 
 export const removeCourse = (req, res) => {
   const { courseID } = req.params;
