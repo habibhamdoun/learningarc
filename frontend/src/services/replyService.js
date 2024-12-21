@@ -30,13 +30,3 @@ export const addReply = async (replyData) => {
     throw error;
   }
 };
-
-export const removeReply = async (replyID) => {
-  try {
-    const response = await axios.delete(`${API_URL_REPLY}/${replyID}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error deleting reply:', error.response || error.message);
-    throw error;
-  }
-};

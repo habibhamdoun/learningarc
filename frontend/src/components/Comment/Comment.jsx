@@ -28,6 +28,7 @@ const Comment = ({ comment }) => {
       try {
         const data = await getRepliesByCommentID(parseInt(comment.commentID));
         setReplies(data);
+        console.log('comment.commentID');
         console.log(comment.commentID);
 
         console.log(data);
@@ -46,7 +47,7 @@ const Comment = ({ comment }) => {
 
     const replyData = {
       parentCommentID: parseInt(comment.commentID),
-      studentID: 1, // TODO: fix this
+      userID: 1, // TODO: fix this
       courseID: parseInt(comment.courseID),
       content: newReply,
       commenter: 'Habib', //TODO: fix this
@@ -81,7 +82,7 @@ const Comment = ({ comment }) => {
     >
       <div className='flex justify-between'>
         <div>
-          <Profile name={comment.commenter} small={true} />
+          <Profile name={comment.commenter} pic={''} small={true} />
           <p className='text-gray-500 italic'>
             {formatTimeTo12Hour(comment.datePosted)}
           </p>

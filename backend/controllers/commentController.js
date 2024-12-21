@@ -31,27 +31,19 @@ export const getCommentByLessonID = (req, res) => {
 export const addComment = (req, res) => {
   console.log('Received Payload:', req.body);
 
-  const { lessonID, studentID, content, courseID, commenter } = req.body;
+  const { lessonID, userID, content, courseID, commenter } = req.body;
 
-  if (!lessonID || !studentID || !content || !courseID || !commenter) {
+  if (!lessonID || !userID || !content || !courseID || !commenter) {
     return res.status(400).json({
-      error:
-        'lessonID, studentID, content, courseID, and commenter are required',
+      error: 'lessonID, userID, content, courseID, and commenter are required',
     });
   }
 
   const query = `
-      INSERT INTO comment (lessonID, studentID, content, courseID, commenter, datePosted)
+      INSERT INTO comment (lessonID, userID, content, courseID, commenter, datePosted)
       VALUES (?, ?, ?, ?, ?, ?)
   `;
-  const values = [
-    lessonID,
-    studentID,
-    content,
-    courseID,
-    commenter,
-    new Date(),
-  ];
+  const values = [lessonID, userID, content, courseID, commenter, new Date()];
 
   db.query(query, values, (err, results) => {
     if (err) {
@@ -63,7 +55,7 @@ export const addComment = (req, res) => {
       comment: {
         id: results.insertId,
         lessonID,
-        studentID,
+        userID,
         content,
         courseID,
         commenter,
