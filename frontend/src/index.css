@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-main: #49bbbd;
+  --color-secondary: #136cb5;
+}
+
+body {
+  box-sizing: border-box;
+}
+/* .hover-underline-animation::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--color-main);
+  background: var(--color-gradient);
+  transition: width 0.5s;
+}
+
+.hover-underline-animation:hover::after {
+  width: 100%;
+} */
+.circle {
+  clip-path: ellipse(100% 50% at 50% 100%);
+}
