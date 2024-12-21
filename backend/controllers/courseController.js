@@ -32,34 +32,60 @@ export const getCourses = (req, res) => {
   });
 };
 
+export const getCoursesByTeacher = (req, res) => {
+  const userID = req.user?.id; // Extract userID from the authenticated user's token
+
+  if (!userID) {
+    return res.status(403).json({ error: 'Unauthorized: Teacher not logged in' });
+  }
+
+  const query = 'SELECT * FROM Course WHERE userID = ?';
+  db.query(query, [userID], (err, results) => {
+    if (err) {
+      console.error('Error fetching courses for the teacher:', err);
+      return res.status(500).json({ error: 'Failed to fetch courses for the teacher' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'No courses found for the teacher' });
+    }
+
+    res.status(200).json(results);
+  });
+};
+
 export const addCourse = (req, res) => {
   const { title, description, duration, thumbnail } = req.body;
-  const teacherID = req.user?.id;
+  const userID = req.user?.id;
+
+  console.log('Adding course for user:', userID); // Debugging
 
   if (!title || !description || !duration || !thumbnail) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
-  if (!teacherID) {
+  if (!userID) {
     return res.status(403).json({ error: 'Unauthorized: Teacher not logged in' });
   }
 
   const query =
-    'INSERT INTO Course (title, description, duration, thumbnail, teacherID) VALUES (?, ?, ?, ?, ?)';
-  const values = [title, description, duration, thumbnail, teacherID];
+    'INSERT INTO Course (title, description, duration, thumbnail, userID) VALUES (?, ?, ?, ?, ?)';
+  const values = [title, description, duration, thumbnail, userID];
 
   db.query(query, values, (err, result) => {
     if (err) {
       console.error('Error adding course:', err);
       res.status(500).json({ error: 'Failed to add course' });
     } else {
+      console.log('Course added with ID:', result.insertId); // Debugging
       res.status(201).json({
         message: 'Course added successfully',
-       courseID: result.insertId, 
+        courseID: result.insertId,
       });
     }
   });
 };
+
 
 export const removeCourse = (req, res) => {
   const { courseID } = req.params;

@@ -34,6 +34,7 @@ const AuthPage = () => {
       username: isLogin ? undefined : formData.get("username"),
       password: formData.get("password"),
       role: isLogin ? undefined : formData.get("role"),
+      description: isLogin ? undefined : formData.get("description"), // Added description to payload
     };
 
     try {
@@ -43,6 +44,7 @@ const AuthPage = () => {
         const { token, userID } = response.data;
 
         localStorage.setItem("userID", userID); // Store userID in localStorage
+        localStorage.setItem("token", token);
 
         toast.success("Login successful!");
         console.log("Login Response:", response.data);
@@ -153,6 +155,18 @@ const AuthPage = () => {
                       <option value="STUDENT">Student</option>
                       <option value="TEACHER">Teacher</option>
                     </select>
+                  </div>
+                  <div className="form-control mt-4">
+                    <label className="label">
+                      <span className="label-text font-medium">
+                        Description
+                      </span>
+                    </label>
+                    <textarea
+                      name="description"
+                      placeholder="Enter a description about yourself"
+                      className="textarea textarea-bordered"
+                    ></textarea>
                   </div>
                 </>
               )}
