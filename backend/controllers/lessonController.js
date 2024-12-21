@@ -54,30 +54,30 @@ export const getLessons = (req, res) => {
 };
 
 export const addLesson = (req, res) => {
-  const { lessonID, courseID, title, description, duration } = req.body;
+  const { courseID, title, description, duration } = req.body;
 
-  if (!lessonID || !courseID || !title) {
-    return res
-      .status(400)
-      .json({ error: 'LessonID, CourseID, and title are required' });
+  if (!courseID || !title) {
+    return res.status(400).json({ error: "CourseID and title are required" });
   }
 
   const query =
-    'INSERT INTO Lesson (lessonID, courseID, title, description, duration) VALUES (?, ?, ?, ?, ?)';
-  const values = [lessonID, courseID, title, description, duration];
+    "INSERT INTO Lesson (courseID, title, description, duration) VALUES (?, ?, ?, ?)";
+  const values = [courseID, title, description || null, duration || null];
 
   db.query(query, values, (err, result) => {
     if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Failed to add lesson' });
-    } else {
-      res.status(201).json({
-        message: 'Lesson added successfully',
-        lessonID: result.insertId,
-      });
+      console.error("Error adding lesson:", err);
+      return res.status(500).json({ error: "Failed to add lesson" });
     }
+
+    res.status(201).json({
+      message: "Lesson added successfully",
+      lessonID: result.insertId,
+    });
   });
 };
+
+
 
 export const removeLesson = (req, res) => {
   const { lessonID } = req.params;

@@ -12,6 +12,7 @@ import AdminPage from "./components/Dashboard/AdminPage";
 import AddCourse from "./components/Dashboard/pages/AddCourse";
 import Lesson from "./components/Lessons/Lesson.jsx";
 import UploadVideo from "./components/UploadVideo.jsx";
+import AddCourseForm from "./components/AddCourseForm.jsx";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin/add" element={<AddCourse />} />
+        <Route path="/admin/add" element={<AddCourseForm />} />
       </Routes>
       <Footer />
     </div>
