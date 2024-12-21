@@ -44,9 +44,11 @@ const Comment = ({ comment }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('handleSubmit for Reply triggered');
+    console.log('comment.commentID');
+    console.log(comment.commentID);
 
     const replyData = {
-      parentCommentID: parseInt(comment.commentID),
+      parentCommentID: comment.commentID,
       userID: 1, // TODO: fix this
       courseID: parseInt(comment.courseID),
       content: newReply,
