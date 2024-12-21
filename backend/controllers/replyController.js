@@ -29,22 +29,22 @@ export const getRepliesByCommentID = (req, res) => {
 export const addReply = (req, res) => {
   console.log('Received Payload:', req.body);
 
-  const { parentCommentID, studentID, content, courseID, commenter } = req.body;
+  const { parentCommentID, userID, content, courseID, commenter } = req.body;
 
-  if (!parentCommentID || !studentID || !content || !courseID || !commenter) {
+  if (!parentCommentID || !userID || !content || !courseID || !commenter) {
     return res.status(400).json({
       error:
-        'parentCommentID, studentID, content, courseID, and commenter are required',
+        'parentCommentID, userID, content, courseID, and commenter are required',
     });
   }
 
   const query = `
-      INSERT INTO reply (parentCommentID, studentID, content, courseID, commenter, datePosted)
+      INSERT INTO reply (parentCommentID, userID, content, courseID, commenter, datePosted)
       VALUES (?, ?, ?, ?, ?, ?)
   `;
   const values = [
     parentCommentID,
-    studentID,
+    userID,
     content,
     courseID,
     commenter,
@@ -61,7 +61,7 @@ export const addReply = (req, res) => {
       reply: {
         id: results.insertId,
         parentCommentID,
-        studentID,
+        userID,
         content,
         courseID,
         commenter,

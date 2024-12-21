@@ -107,8 +107,8 @@ const Course = () => {
           <div>
             {!loadingInstructor && instructor ? (
               <Profile
-                name={instructor.name}
-                pic={instructor.profilePicture}
+                name={instructor.username}
+                pic={''}
                 description={instructor.description}
               />
             ) : (

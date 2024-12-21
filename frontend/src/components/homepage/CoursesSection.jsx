@@ -9,7 +9,7 @@ const CoursesSection = () => {
     const fetchData = async () => {
       try {
         const data = await getCourses();
-        setCourses(data);
+        setCourses(data.slice(0, 5));
       } catch (error) {
         console.error('Failed to fetch courses:', error);
       }
@@ -19,8 +19,6 @@ const CoursesSection = () => {
     if (courses.length > 0) {
       setLoading(false);
     }
-
-    // console.log(courses);
   }, [courses]);
   return (
     <div className='overflow-x-hidden'>

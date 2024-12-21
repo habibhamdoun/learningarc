@@ -31,7 +31,11 @@ const Lesson = () => {
   useEffect(() => {
     const fetchLessons = async () => {
       try {
-        const data = await getLesson(lessonId);
+        const data = await getLesson(parseInt(lessonId));
+        console.log('lesson data');
+
+        console.log(data);
+
         setLesson(data);
       } catch (error) {
         console.error('Failed to fetch lessons:', error);
@@ -125,7 +129,7 @@ const Lesson = () => {
 
     const commentData = {
       lessonID: parseInt(lessonId),
-      studentID: 1,
+      userID: 1,
       content: newComment,
       courseID: parseInt(courseId),
       commenter: 'Habib',
@@ -198,8 +202,8 @@ const Lesson = () => {
           <div>
             {!loadingInstructor ? (
               <Profile
-                name={instructor.name}
-                pic={instructor.profile_pic}
+                name={instructor.username}
+                pic={''}
                 description={instructor.description}
               />
             ) : (
