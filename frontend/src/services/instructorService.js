@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-const API_URL_INSTRUCTOR = 'http://localhost:5000/api/instructors'; // Replace with your backend URL
-
-// Instructor Services
+const API_URL_INSTRUCTOR = 'http://localhost:5000/api/instructors';
 
 export const getInstructors = async () => {
   try {

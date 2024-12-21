@@ -39,15 +39,21 @@ export const getLesson = (req, res) => {
   });
 };
 export const addLesson = (req, res) => {
-  const { courseID, title, description, duration } = req.body;
+  const { courseID, title, description, duration, videoID } = req.body;
 
   if (!courseID || !title) {
     return res.status(400).json({ error: 'CourseID and title are required' });
   }
 
   const query =
-    'INSERT INTO Lesson (courseID, title, description, duration) VALUES (?, ?, ?, ?)';
-  const values = [courseID, title, description || null, duration || null];
+    'INSERT INTO Lesson (courseID, title, description, duration,videoID) VALUES (?, ?, ?, ?,?)';
+  const values = [
+    courseID,
+    title,
+    description || null,
+    duration || null,
+    (videoID = parseInt(videoID)),
+  ];
 
   db.query(query, values, (err, result) => {
     if (err) {

@@ -13,7 +13,6 @@ const Comment = ({ comment }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Fetch userID from localStorage
     const storedUserID = localStorage.getItem('userID');
     if (storedUserID) {
       setUserID(storedUserID);
@@ -21,7 +20,6 @@ const Comment = ({ comment }) => {
   }, []);
 
   useEffect(() => {
-    // Fetch user data if userID exists
     const fetchUser = async () => {
       try {
         const data = await getUserbyID(userID);
@@ -81,10 +79,10 @@ const Comment = ({ comment }) => {
 
     const replyData = {
       parentCommentID: comment.commentID,
-      userID: localStorage.getItem('userID'), // TODO: fix this
+      userID: localStorage.getItem('userID'),
       courseID: parseInt(comment.courseID),
       content: newReply,
-      commenter: user.username, //TODO: fix this
+      commenter: user.username,
     };
 
     console.log('Prepared Reply Data:', replyData);

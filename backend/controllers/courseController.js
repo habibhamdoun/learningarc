@@ -33,7 +33,7 @@ export const getCourses = (req, res) => {
 };
 
 export const getCoursesByTeacher = (req, res) => {
-  const userID = req.user?.id; // Extract userID from the authenticated user's token
+  const userID = req.user?.id;
 
   if (!userID) {
     return res
@@ -86,7 +86,7 @@ export const addCourse = (req, res) => {
       console.error('Error adding course:', err);
       res.status(500).json({ error: 'Failed to add course' });
     } else {
-      console.log('Course added with ID:', result.insertId); // Debugging
+      console.log('Course added with ID:', result.insertId);
       res.status(201).json({
         message: 'Course added successfully',
         courseID: result.insertId,

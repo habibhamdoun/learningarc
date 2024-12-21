@@ -29,13 +29,11 @@ const AddCourseForm = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  // Generate a random thumbnail on component mount
   useEffect(() => {
     const thumb = getRandomLink();
     setThumbnailState(thumb);
   }, []);
 
-  // Update formData.thumbnail whenever thumbnailState changes
   useEffect(() => {
     setFormData((prev) => ({
       ...prev,
@@ -67,14 +65,13 @@ const AddCourseForm = () => {
 
       const payload = { ...formData };
 
-      // Send POST request to add the course
       const response = await axios.post(
         'http://localhost:5000/api/courses',
         payload,
         config,
       );
 
-      setMessage(response.data.message); // Show success message
+      setMessage(response.data.message);
       setFormData({
         title: '',
         description: '',
@@ -84,7 +81,7 @@ const AddCourseForm = () => {
     } catch (error) {
       const errorMessage =
         error.response?.data?.error || 'An unexpected error occurred';
-      setMessage(errorMessage); // Show error message
+      setMessage(errorMessage);
     } finally {
       setLoading(false);
     }

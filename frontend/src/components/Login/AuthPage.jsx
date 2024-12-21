@@ -9,7 +9,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-// Set base URL for Axios
 axios.defaults.baseURL = 'http://localhost:5000';
 
 const AuthPage = () => {
@@ -34,30 +33,26 @@ const AuthPage = () => {
       username: isLogin ? undefined : formData.get('username'),
       password: formData.get('password'),
       role: isLogin ? undefined : formData.get('role'),
-      description: isLogin ? undefined : formData.get('description'), // Added description to payload
+      description: isLogin ? undefined : formData.get('description'),
     };
 
     try {
       if (isLogin) {
-        // Login Logic
         const response = await axios.post('/api/auth/login', payload);
         const { token, userID } = response.data;
 
-        localStorage.setItem('userID', userID); // Store userID in localStorage
+        localStorage.setItem('userID', userID);
         localStorage.setItem('token', token);
 
         toast.success('Login successful!');
         console.log('Login Response:', response.data);
 
-        // Redirect to dashboard or another page after login
         navigate('/home');
       } else {
-        // Registration Logic
         const response = await axios.post('/api/auth/register', payload);
         toast.success('Registration successful!');
         console.log('Register Response:', response.data);
 
-        // Redirect to login after successful registration
         setIsLogin(true);
       }
     } catch (error) {

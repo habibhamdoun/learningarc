@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post('/register', register);
 router.post('/login', login);
-router.post('/logout', verifyToken, logout); // Optionally protect this route
+router.post('/logout', verifyToken, logout);
 
 export default router;

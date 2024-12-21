@@ -8,7 +8,6 @@ const User = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Fetch userID from localStorage
     const storedUserID = localStorage.getItem('userID');
     if (storedUserID) {
       setUserID(storedUserID);
@@ -19,7 +18,6 @@ const User = () => {
   }, []);
 
   useEffect(() => {
-    // Fetch user data if userID exists
     const fetchUser = async () => {
       setLoading(true);
       try {

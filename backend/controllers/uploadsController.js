@@ -1,11 +1,3 @@
-import db from '../models/db.js';
-import fs from 'fs';
-import path from 'path';
-
-// Ensure `__dirname` is available in ES modules
-import { fileURLToPath } from 'url';
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 export const addVideo = (req, res) => {
   try {
     console.log('Received Payload:', req.body);
@@ -14,7 +6,6 @@ export const addVideo = (req, res) => {
     const { description, date, category } = req.body;
     const filename = req.file?.filename;
 
-    // Validate required fields
     if (!description || !date || !category || !filename) {
       console.error('Validation Error: Missing required fields');
       return res.status(400).json({
@@ -22,10 +13,9 @@ export const addVideo = (req, res) => {
       });
     }
 
-    // Validate and format date
     let formattedDate;
     try {
-      formattedDate = new Date(date).toISOString().slice(0, 10); // Convert to YYYY-MM-DD format
+      formattedDate = new Date(date).toISOString().slice(0, 10);
     } catch (err) {
       console.error('Date Formatting Error:', err);
       return res.status(400).json({ error: 'Invalid date format' });
@@ -40,14 +30,13 @@ export const addVideo = (req, res) => {
 
     console.log('Executing Query:', query, values);
 
-    // Insert video details into the database
     db.query(query, values, (err, result) => {
       if (err) {
-        console.error('Database Error:', err); // Log database errors
+        console.error('Database Error:', err);
         return res.status(500).json({ error: 'Database error occurred' });
       }
 
-      const videoId = result.insertId; // Auto-increment ID
+      const videoId = result.insertId;
       const newFilename = `${category}-${videoId}${path.extname(
         req.file.originalname,
       )}`;
@@ -56,10 +45,9 @@ export const addVideo = (req, res) => {
 
       console.log('Renaming File:', oldFilePath, newFilePath);
 
-      // Rename the uploaded file to include the video ID
       fs.rename(oldFilePath, newFilePath, (renameErr) => {
         if (renameErr) {
-          console.error('File Rename Error:', renameErr); // Log file rename errors
+          console.error('File Rename Error:', renameErr);
           return res
             .status(500)
             .json({ error: 'Failed to rename uploaded file' });
@@ -67,11 +55,10 @@ export const addVideo = (req, res) => {
 
         console.log('File Renamed Successfully');
 
-        // Update the filename in the database
         const updateQuery = 'UPDATE videos SET image = ? WHERE id = ?';
         db.query(updateQuery, [newFilename, videoId], (updateErr) => {
           if (updateErr) {
-            console.error('Database Update Error:', updateErr); // Log database update errors
+            console.error('Database Update Error:', updateErr);
             return res
               .status(500)
               .json({ error: 'Failed to update file name in database' });
