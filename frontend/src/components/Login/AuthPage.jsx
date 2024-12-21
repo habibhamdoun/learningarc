@@ -3,16 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import login from "../../assets/login.png";
 import register from "../../assets/register.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
+// Set base URL for Axios
 axios.defaults.baseURL = "http://localhost:5000";
 
 const AuthPage = () => {
   const search = useLocation().search;
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(
     search === "?isLogin=true" ? true : false
   );
@@ -29,25 +31,38 @@ const AuthPage = () => {
 
     const payload = {
       email: formData.get("email"),
-      username: formData.get("username"),
+      username: isLogin ? undefined : formData.get("username"),
       password: formData.get("password"),
       role: isLogin ? undefined : formData.get("role"),
     };
 
     try {
       if (isLogin) {
+        // Login Logic
         const response = await axios.post("/api/auth/login", payload);
+        const { token, userID } = response.data;
+
+        localStorage.setItem("userID", userID); // Store userID in localStorage
+
         toast.success("Login successful!");
-        console.log(response.data);
+        console.log("Login Response:", response.data);
+
+        // Redirect to dashboard or another page after login
+        navigate("/home");
       } else {
+        // Registration Logic
         const response = await axios.post("/api/auth/register", payload);
         toast.success("Registration successful!");
-        console.log(response.data);
+        console.log("Register Response:", response.data);
+
+        // Redirect to login after successful registration
+        setIsLogin(true);
       }
     } catch (error) {
       const errorMessage =
         error.response?.data?.error || "An unexpected error occurred";
       toast.error(errorMessage);
+      console.error("Error:", error.response || error);
     }
   };
 

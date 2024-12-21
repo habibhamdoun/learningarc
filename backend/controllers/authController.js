@@ -1,11 +1,12 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import db from "../models/db.js";
-
 import dotenv from "dotenv";
+
 dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY;
 
+// Register a new user
 export const register = async (req, res) => {
   try {
     const { email, username, password, role } = req.body;
@@ -15,7 +16,6 @@ export const register = async (req, res) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    // Check if the user already exists
     const existingUser = await new Promise((resolve, reject) => {
       const query = "SELECT * FROM User WHERE email = ?";
       db.query(query, [email], (err, results) => {
@@ -34,24 +34,28 @@ export const register = async (req, res) => {
     // Insert new user into the database
     const insertQuery =
       "INSERT INTO User (email, username, password, role) VALUES (?, ?, ?, ?)";
-    await new Promise((resolve, reject) => {
+    const newUser = await new Promise((resolve, reject) => {
       db.query(
         insertQuery,
         [email, username, hashedPassword, role],
         (err, results) => {
           if (err) return reject(err);
-          resolve(results);
+          resolve({ id: results.insertId, email, username, role });
         }
       );
     });
 
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({
+      message: "User registered successfully",
+      user: newUser,
+    });
   } catch (error) {
     console.error("Error during registration:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
 
+// Login user
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -72,9 +76,11 @@ export const login = async (req, res) => {
 
     // If user does not exist, return an error
     if (!user) {
-      return res.status(404).json({
-        error: "User not found. Please register first.",
-      });
+
+      return res
+        .status(404)
+        .json({ error: "User not found. Please register first." });
+
     }
 
     // Validate the password
@@ -90,12 +96,18 @@ export const login = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ message: "Login successful", token });
+    // Send response with userID and token
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      userID: user.userID, // Include userID in the response
+    });
   } catch (error) {
     console.error("Error during login:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
+
 
 export const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"]?.split(" ")[1];
@@ -109,6 +121,7 @@ export const verifyToken = (req, res, next) => {
     req.user = decoded; // Attach user info to the request
     next();
   } catch (error) {
+    console.error("Token verification failed:", error);
     res.status(401).json({ error: "Invalid token" });
   }
 };

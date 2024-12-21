@@ -9,10 +9,17 @@ const AddCourseForm = () => {
     thumbnail: "",
   });
 
+  const [lessons, setLessons] = useState([]);
+  const [lessonData, setLessonData] = useState({
+    title: "",
+    description: "",
+    duration: "",
+  });
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleChange = (e) => {
+  const handleCourseChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -20,10 +27,41 @@ const AddCourseForm = () => {
     });
   };
 
+  const handleLessonChange = (e) => {
+    const { name, value } = e.target;
+    setLessonData({
+      ...lessonData,
+      [name]: value,
+    });
+  };
+
+  const addLesson = () => {
+    if (!lessonData.title || !lessonData.description || !lessonData.duration) {
+      setMessage("Please fill in all lesson fields before adding.");
+      return;
+    }
+
+    setLessons([...lessons, lessonData]);
+    setLessonData({
+      title: "",
+      description: "",
+      duration: "",
+    });
+    setMessage("Lesson added successfully!");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
+
+    if (lessons.length === 0) {
+      setMessage(
+        "You must add at least one lesson before submitting the course."
+      );
+      setLoading(false);
+      return;
+    }
 
     try {
       // Add token if required (e.g., for logged-in teachers)
@@ -35,10 +73,12 @@ const AddCourseForm = () => {
         },
       };
 
+      const payload = { ...formData, lessons };
+
       // Send POST request to add the course
       const response = await axios.post(
         "http://localhost:5000/api/courses",
-        formData,
+        payload,
         config
       );
 
@@ -49,6 +89,7 @@ const AddCourseForm = () => {
         duration: "",
         thumbnail: "",
       });
+      setLessons([]); // Reset lessons
     } catch (error) {
       const errorMessage =
         error.response?.data?.error || "An unexpected error occurred";
@@ -82,7 +123,7 @@ const AddCourseForm = () => {
             id="title"
             name="title"
             value={formData.title}
-            onChange={handleChange}
+            onChange={handleCourseChange}
             className="w-full mt-2 p-3 border rounded-md"
             placeholder="Enter course title"
             required
@@ -96,7 +137,7 @@ const AddCourseForm = () => {
             id="description"
             name="description"
             value={formData.description}
-            onChange={handleChange}
+            onChange={handleCourseChange}
             className="w-full mt-2 p-3 border rounded-md"
             rows="4"
             placeholder="Enter course description"
@@ -112,7 +153,7 @@ const AddCourseForm = () => {
             id="duration"
             name="duration"
             value={formData.duration}
-            onChange={handleChange}
+            onChange={handleCourseChange}
             className="w-full mt-2 p-3 border rounded-md"
             placeholder="Enter duration"
             required
@@ -127,12 +168,81 @@ const AddCourseForm = () => {
             id="thumbnail"
             name="thumbnail"
             value={formData.thumbnail}
-            onChange={handleChange}
+            onChange={handleCourseChange}
             className="w-full mt-2 p-3 border rounded-md"
             placeholder="Enter thumbnail URL"
             required
           />
         </div>
+        <div className="mt-6">
+          <h3 className="text-lg font-bold">Add Lessons</h3>
+          <div className="space-y-4 mt-4">
+            <div>
+              <label htmlFor="lessonTitle" className="block font-medium">
+                Lesson Title
+              </label>
+              <input
+                type="text"
+                id="lessonTitle"
+                name="title"
+                value={lessonData.title}
+                onChange={handleLessonChange}
+                className="w-full mt-2 p-3 border rounded-md"
+                placeholder="Enter lesson title"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="lessonDescription" className="block font-medium">
+                Lesson Description
+              </label>
+              <textarea
+                id="lessonDescription"
+                name="description"
+                value={lessonData.description}
+                onChange={handleLessonChange}
+                className="w-full mt-2 p-3 border rounded-md"
+                rows="2"
+                placeholder="Enter lesson description"
+                required
+              ></textarea>
+            </div>
+            <div>
+              <label htmlFor="lessonDuration" className="block font-medium">
+                Lesson Duration (in minutes)
+              </label>
+              <input
+                type="number"
+                id="lessonDuration"
+                name="duration"
+                value={lessonData.duration}
+                onChange={handleLessonChange}
+                className="w-full mt-2 p-3 border rounded-md"
+                placeholder="Enter lesson duration"
+                required
+              />
+            </div>
+            <button
+              type="button"
+              onClick={addLesson}
+              className="px-4 py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition"
+            >
+              Add Lesson
+            </button>
+          </div>
+        </div>
+        {lessons.length > 0 && (
+          <div className="mt-6">
+            <h3 className="text-lg font-bold">Lessons</h3>
+            <ul className="mt-2 list-disc list-inside">
+              {lessons.map((lesson, index) => (
+                <li key={index}>
+                  {lesson.title} - {lesson.duration} minutes
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <button
           type="submit"
           className={`w-full p-3 text-white font-bold rounded-md ${
