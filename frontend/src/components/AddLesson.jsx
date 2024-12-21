@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import SideBar from "./Dashboard/SideBar";
+import UploadVideo from "./UploadVideo";
 
 const AddLesson = () => {
   const [message, setMessage] = useState("");
@@ -177,6 +178,8 @@ const AddLesson = () => {
               required
             />
           </div>
+
+          <UploadVideo />
 
           {/* Add Lesson Button */}
           <button
