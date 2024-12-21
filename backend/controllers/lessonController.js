@@ -23,11 +23,9 @@ export const getLessonByCourseID = (req, res) => {
 };
 export const getLesson = (req, res) => {
   const { lessonID } = req.params;
-
   if (!lessonID) {
     return res.status(400).json({ error: 'LessonID is required' });
   }
-
   const query = 'SELECT * FROM Lesson WHERE lessonID = ?';
   db.query(query, [lessonID], (err, results) => {
     if (err) {
@@ -40,32 +38,29 @@ export const getLesson = (req, res) => {
     }
   });
 };
-
 export const addLesson = (req, res) => {
   const { courseID, title, description, duration } = req.body;
 
   if (!courseID || !title) {
-    return res.status(400).json({ error: "CourseID and title are required" });
+    return res.status(400).json({ error: 'CourseID and title are required' });
   }
 
   const query =
-    "INSERT INTO Lesson (courseID, title, description, duration) VALUES (?, ?, ?, ?)";
+    'INSERT INTO Lesson (courseID, title, description, duration) VALUES (?, ?, ?, ?)';
   const values = [courseID, title, description || null, duration || null];
 
   db.query(query, values, (err, result) => {
     if (err) {
-      console.error("Error adding lesson:", err);
-      return res.status(500).json({ error: "Failed to add lesson" });
+      console.error('Error adding lesson:', err);
+      return res.status(500).json({ error: 'Failed to add lesson' });
     }
 
     res.status(201).json({
-      message: "Lesson added successfully",
+      message: 'Lesson added successfully',
       lessonID: result.insertId,
     });
   });
 };
-
-
 
 export const removeLesson = (req, res) => {
   const { lessonID } = req.params;

@@ -5,11 +5,12 @@ import { NavLink } from 'react-router-dom';
 const SideBar = () => {
   const menuItems = [
     { to: '/admin/add', icon: add_icon, label: 'Add Courses' },
+    { to: '/admin/lessons/add', icon: add_icon, label: 'Add Lessons' },
     { to: '/admin/list', icon: order_icon, label: 'List ' },
   ];
 
   return (
-    <div className='w-1/5 min-h-screen border border-gray-400 border-t-0'>
+    <div className='fixed w-1/5 min-h-screen '>
       <div className='pt-4 pl-8 flex flex-col gap-5'>
         {menuItems.map((item, index) => (
           <NavLink

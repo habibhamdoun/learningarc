@@ -1,7 +1,7 @@
 import db from '../models/db.js';
 
 export const getInstructors = (req, res) => {
-  const query = 'SELECT * FROM Teacher';
+  const query = 'SELECT * FROM user where role="TEACHER"';
   db.query(query, (err, results) => {
     if (err) {
       console.error(err);
@@ -19,7 +19,8 @@ export const getInstructor = (req, res) => {
     return res.status(400).json({ error: 'TeacherID is required' });
   }
 
-  const query = 'SELECT * FROM Teacher WHERE teacherID = ?';
+  const query =
+    'SELECT * FROM user WHERE role = "TEACHER" AND userID = ? LIMIT 1';
   db.query(query, [teacherID], (err, results) => {
     if (err) {
       console.error(err);
@@ -39,9 +40,7 @@ export const getInstructorByCourse = (req, res) => {
     return res.status(400).json({ error: 'CourseID is required' });
   }
 
-  const query = `
-      SELECT  * FROM Teacher
-      WHERE teacherID = (SELECT teacherID FROM Course WHERE courseID = ?)`;
+  const query = `SELECT * FROM user WHERE role = "TEACHER" AND userID = (SELECT userID FROM course WHERE courseID = ? LIMIT 1);`;
 
   db.query(query, [courseID], (err, results) => {
     if (err) {

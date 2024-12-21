@@ -31,7 +31,7 @@ const Lesson = () => {
   useEffect(() => {
     const fetchLessons = async () => {
       try {
-        const data = await getLesson(lessonId);
+        const data = await getLesson(parseInt(lessonId));
         setLesson(data);
       } catch (error) {
         console.error('Failed to fetch lessons:', error);

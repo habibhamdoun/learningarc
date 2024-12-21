@@ -27,7 +27,7 @@ const Profile = ({ name, pic, description, small }) => {
   }, []);
   return (
     <div className='flex gap-5'>
-      {pic ? (
+      {pic != '' ? (
         <div className='avatar w-28'>
           <div className='ring-primary ring-offset-base-100 w-full rounded-full ring ring-offset-2'>
             <img src={pic} />
