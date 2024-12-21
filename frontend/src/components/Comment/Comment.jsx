@@ -3,11 +3,40 @@ import Profile from '../General/Profile';
 import ReplyDD from './ReplyDD';
 import { addReply, getRepliesByCommentID } from '../../services/replyService';
 import { useEffect, useState } from 'react';
+import { getUserbyID } from '../../services/userService';
 
 const Comment = ({ comment }) => {
   const [replies, setReplies] = useState([]);
   const [newReply, setNewReply] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [userID, setUserID] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Fetch userID from localStorage
+    const storedUserID = localStorage.getItem('userID');
+    if (storedUserID) {
+      setUserID(storedUserID);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Fetch user data if userID exists
+    const fetchUser = async () => {
+      try {
+        const data = await getUserbyID(userID);
+        setUser(data);
+        console.log('data');
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (userID) {
+      fetchUser();
+    }
+  }, [userID]);
 
   const formatTimeTo12Hour = (dateTime) => {
     if (!dateTime) return '';
@@ -28,10 +57,10 @@ const Comment = ({ comment }) => {
       try {
         const data = await getRepliesByCommentID(parseInt(comment.commentID));
         setReplies(data);
-        // console.log('comment.commentID');
-        // console.log(comment.commentID);
+        console.log('comment.commentID');
+        console.log(comment.commentID);
 
-        // console.log(data);
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -40,33 +69,36 @@ const Comment = ({ comment }) => {
     if (comment) {
       fetchReplies();
     }
-  }, [comment]);
+  }, [comment, comment.commentID]);
   const handleSubmit = async (e) => {
+    if (!user) {
+      window.href = '/login';
+    }
     e.preventDefault();
-    // console.log('handleSubmit for Reply triggered');
-    // console.log('comment.commentID');
-    // console.log(comment.commentID);
+    console.log('handleSubmit for Reply triggered');
+    console.log('comment.commentID');
+    console.log(comment.commentID);
 
     const replyData = {
       parentCommentID: comment.commentID,
-      userID: 1, // TODO: fix this
+      userID: localStorage.getItem('userID'), // TODO: fix this
       courseID: parseInt(comment.courseID),
       content: newReply,
-      commenter: 'Habib', //TODO: fix this
+      commenter: user.username, //TODO: fix this
     };
 
-    // console.log('Prepared Reply Data:', replyData);
+    console.log('Prepared Reply Data:', replyData);
 
     if (!newReply.trim()) {
-      // console.log('Reply content is empty');
+      console.log('Reply content is empty');
       setErrorMessage('Reply cannot be empty.');
       return;
     }
 
     try {
-      // console.log('Before calling addReply');
+      console.log('Before calling addReply');
       const result = await addReply(replyData);
-      // console.log('After calling addReply', result);
+      console.log('After calling addReply', result);
 
       setReplies((prevReplies) => [...prevReplies, result.reply]);
       setNewReply('');

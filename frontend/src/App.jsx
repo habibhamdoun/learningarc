@@ -12,7 +12,6 @@ import AdminPage from './components/Dashboard/AdminPage';
 import Lesson from './components/Lessons/Lesson.jsx';
 import AddCourseForm from './components/AddCourseForm.jsx';
 import AddLesson from './components/AddLesson.jsx';
-// import LogoutBtn from './components/General/LogoutBtn.jsx';
 import User from './components/General/User.jsx';
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
         <Route path='/admin/add' element={<AddCourseForm />} />
         <Route path='/admin/lessons/add' element={<AddLesson />} />
       </Routes>
-      {/* <LogoutBtn /> */}
       <Footer />
     </div>
   );

@@ -139,8 +139,8 @@ export const verifyToken = (req, res, next) => {
 
 // Logout user
 export const logout = (req, res) => {
+  localStorage.setItem('userID', null);
   try {
-    // Inform client to clear token
     res.status(200).json({ message: 'Logout successful' });
   } catch (error) {
     console.error('Error during logout:', error);
