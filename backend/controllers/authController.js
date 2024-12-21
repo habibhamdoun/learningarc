@@ -147,21 +147,3 @@ export const logout = (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
-
-// const getUserbyID = (req, res) => {
-//   const { userID } = req.params;
-//   if (!userID) {
-//     return res.status(400).json({ error: 'userID is required' });
-//   }
-//   const query = 'SELECT * FROM user where userID= ?';
-//   db.query(query, [userID], (err, results) => {
-//     if (err) {
-//       console.error(err);
-//       res.status(500).json({ error: 'Failed to fetch user' });
-//     } else if (results.length === 0) {
-//       res.status(404).json({ error: 'Lesson not found' });
-//     } else {
-//       res.json(results[0]);
-//     }
-//   });
-// };

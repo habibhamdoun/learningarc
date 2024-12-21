@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import login from '../../assets/login.png';
@@ -41,11 +41,9 @@ const AuthPage = () => {
       if (isLogin) {
         // Login Logic
         const response = await axios.post('/api/auth/login', payload);
-        const { token, userID, username, email } = response.data;
+        const { token, userID } = response.data;
 
         localStorage.setItem('userID', userID); // Store userID in localStorage
-        localStorage.setItem('username', username); // Store userID in localStorage
-        localStorage.setItem('email', email); // Store userID in localStorage
         localStorage.setItem('token', token);
 
         toast.success('Login successful!');
@@ -69,6 +67,10 @@ const AuthPage = () => {
       console.error('Error:', error.response || error);
     }
   };
+  useEffect(() => {
+    console.log('userID');
+    console.log(localStorage.getItem('userID'));
+  }, [FormData]);
 
   return (
     <div className='flex h-screen bg-base-100 items-center'>
