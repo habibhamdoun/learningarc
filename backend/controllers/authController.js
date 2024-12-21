@@ -7,15 +7,17 @@ dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY;
 
 // Register a new user
+// Register a new user
 export const register = async (req, res) => {
   try {
-    const { email, username, password, role } = req.body;
+    const { email, username, password, role, description } = req.body;
 
     // Validate required fields
-    if (!email || !username || !password || !role) {
+    if (!email || !username || !password || !role || !description) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
+    // Check if user already exists
     const existingUser = await new Promise((resolve, reject) => {
       const query = "SELECT * FROM User WHERE email = ?";
       db.query(query, [email], (err, results) => {
@@ -33,27 +35,37 @@ export const register = async (req, res) => {
 
     // Insert new user into the database
     const insertQuery =
-      "INSERT INTO User (email, username, password, role) VALUES (?, ?, ?, ?)";
-    const newUser = await new Promise((resolve, reject) => {
+      "INSERT INTO User (email, username, password, role, description) VALUES (?, ?, ?, ?, ?)";
+    const newUserId = await new Promise((resolve, reject) => {
       db.query(
         insertQuery,
-        [email, username, hashedPassword, role],
+        [email, username, hashedPassword, role, description],
         (err, results) => {
           if (err) return reject(err);
-          resolve({ id: results.insertId, email, username, role });
+          resolve(results.insertId); // Resolve with the inserted user ID
         }
       );
     });
 
+    // Fetch the inserted user to include all fields in the response
+    const insertedUser = await new Promise((resolve, reject) => {
+      const fetchQuery = "SELECT userID AS id, email, username, role, description FROM User WHERE userID = ?";
+      db.query(fetchQuery, [newUserId], (err, results) => {
+        if (err) return reject(err);
+        resolve(results[0]); // Resolve with the inserted user's details
+      });
+    });
+
     res.status(201).json({
       message: "User registered successfully",
-      user: newUser,
+      user: insertedUser, // Send the complete user object, including description
     });
   } catch (error) {
     console.error("Error during registration:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
+
 
 // Login user
 export const login = async (req, res) => {
@@ -76,11 +88,9 @@ export const login = async (req, res) => {
 
     // If user does not exist, return an error
     if (!user) {
-
       return res
         .status(404)
         .json({ error: "User not found. Please register first." });
-
     }
 
     // Validate the password
@@ -101,6 +111,7 @@ export const login = async (req, res) => {
       message: "Login successful",
       token,
       userID: user.userID, // Include userID in the response
+      description: user.description, // Include description in the response
     });
   } catch (error) {
     console.error("Error during login:", error);
@@ -108,7 +119,7 @@ export const login = async (req, res) => {
   }
 };
 
-
+// Middleware to verify token
 export const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"]?.split(" ")[1];
 
@@ -123,5 +134,16 @@ export const verifyToken = (req, res, next) => {
   } catch (error) {
     console.error("Token verification failed:", error);
     res.status(401).json({ error: "Invalid token" });
+  }
+};
+
+// Logout user
+export const logout = (req, res) => {
+  try {
+    // Inform client to clear token
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.error("Error during logout:", error);
+    res.status(500).json({ error: "Server error" });
   }
 };

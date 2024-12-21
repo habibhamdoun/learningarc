@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/courses'; // Replace with your backend URL
+const API_URL = 'http://localhost:5000/api/courses';
 
 export const getCourses = async () => {
   try {
@@ -22,7 +22,6 @@ export const getCourse = async (courseID) => {
   }
 };
 
-// Add a new student
 export const addCourse = async (courseData) => {
   try {
     const response = await axios.post(`${API_URL}`, courseData);

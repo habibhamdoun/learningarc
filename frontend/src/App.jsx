@@ -1,3 +1,6 @@
+
+
+
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Nav from './components/NavBar/Nav';
@@ -12,6 +15,7 @@ import AdminPage from './components/Dashboard/AdminPage';
 import Lesson from './components/Lessons/Lesson.jsx';
 import AddCourseForm from './components/AddCourseForm.jsx';
 import AddLesson from './components/AddLesson.jsx';
+
 
 function App() {
   return (
