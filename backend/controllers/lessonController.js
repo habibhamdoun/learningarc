@@ -41,8 +41,6 @@ export const getLesson = (req, res) => {
   });
 };
 
-
-
 export const addLesson = (req, res) => {
   const { lessonID, courseID, title, description, duration } = req.body;
 

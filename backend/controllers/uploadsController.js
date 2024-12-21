@@ -48,7 +48,9 @@ export const addVideo = (req, res) => {
       }
 
       const videoId = result.insertId; // Auto-increment ID
-      const newFilename = `${category}-${videoId}${path.extname(req.file.originalname)}`;
+      const newFilename = `${category}-${videoId}${path.extname(
+        req.file.originalname,
+      )}`;
       const oldFilePath = path.join(__dirname, '..', 'uploads', filename);
       const newFilePath = path.join(__dirname, '..', 'uploads', newFilename);
 
@@ -58,7 +60,9 @@ export const addVideo = (req, res) => {
       fs.rename(oldFilePath, newFilePath, (renameErr) => {
         if (renameErr) {
           console.error('File Rename Error:', renameErr); // Log file rename errors
-          return res.status(500).json({ error: 'Failed to rename uploaded file' });
+          return res
+            .status(500)
+            .json({ error: 'Failed to rename uploaded file' });
         }
 
         console.log('File Renamed Successfully');

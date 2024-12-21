@@ -1,7 +1,7 @@
 // import { Navigate, Route, Routes } from 'react-router-dom';
-import "./App.css";
-import Nav from "./components/NavBar/Nav";
-import Footer from "./components/General/Footer";
+import './App.css';
+import Nav from './components/NavBar/Nav';
+import Footer from './components/General/Footer';
 // import AuthPage from './components/Login/AuthPage';
 // import CoursesPart from './components/CoursesPage/CoursesPart';
 // import HomePage from './components/homepage/HomePage';
@@ -11,7 +11,7 @@ import Footer from "./components/General/Footer";
 // import AdminPage from './components/Dashboard/AdminPage';
 // import AddCourse from './components/Dashboard/pages/AddCourse';
 // import Lesson from './components/Lessons/Lesson.jsx';
-import UploadVideo from "./components/UploadVideo.jsx";
+import UploadVideo from './components/UploadVideo.jsx';
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
   );
 }
 
-document.documentElement.setAttribute("data-theme", "mytheme");
+document.documentElement.setAttribute('data-theme', 'mytheme');
 export default App;
 // import { useEffect, useState } from 'react';
 // import { getCourses } from './services/courseService';

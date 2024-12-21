@@ -3,11 +3,15 @@ import axios from 'axios';
 export const addVideo = async (formData) => {
   try {
     // Send POST request with FormData
-    const response = await axios.post('http://localhost:5000/api/videos/add', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data', // Necessary for file uploads
+    const response = await axios.post(
+      'http://localhost:5000/api/videos/add',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Necessary for file uploads
+        },
       },
-    });
+    );
     return response.data; // Return response data if successful
   } catch (error) {
     // Log and throw the error
