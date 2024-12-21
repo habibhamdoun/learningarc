@@ -28,10 +28,10 @@ const Comment = ({ comment }) => {
       try {
         const data = await getRepliesByCommentID(parseInt(comment.commentID));
         setReplies(data);
-        console.log('comment.commentID');
-        console.log(comment.commentID);
+        // console.log('comment.commentID');
+        // console.log(comment.commentID);
 
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -43,9 +43,9 @@ const Comment = ({ comment }) => {
   }, [comment]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('handleSubmit for Reply triggered');
-    console.log('comment.commentID');
-    console.log(comment.commentID);
+    // console.log('handleSubmit for Reply triggered');
+    // console.log('comment.commentID');
+    // console.log(comment.commentID);
 
     const replyData = {
       parentCommentID: comment.commentID,
@@ -55,18 +55,18 @@ const Comment = ({ comment }) => {
       commenter: 'Habib', //TODO: fix this
     };
 
-    console.log('Prepared Reply Data:', replyData);
+    // console.log('Prepared Reply Data:', replyData);
 
     if (!newReply.trim()) {
-      console.log('Reply content is empty');
+      // console.log('Reply content is empty');
       setErrorMessage('Reply cannot be empty.');
       return;
     }
 
     try {
-      console.log('Before calling addReply');
+      // console.log('Before calling addReply');
       const result = await addReply(replyData);
-      console.log('After calling addReply', result);
+      // console.log('After calling addReply', result);
 
       setReplies((prevReplies) => [...prevReplies, result.reply]);
       setNewReply('');

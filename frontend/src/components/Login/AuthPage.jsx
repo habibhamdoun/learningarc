@@ -30,25 +30,23 @@ const AuthPage = () => {
     const formData = new FormData(form);
 
     const payload = {
-
-      email: formData.get("email"),
-      username: isLogin ? undefined : formData.get("username"),
-      password: formData.get("password"),
-      role: isLogin ? undefined : formData.get("role"),
-      description: isLogin ? undefined : formData.get("description"), // Added description to payload
-
+      email: formData.get('email'),
+      username: isLogin ? undefined : formData.get('username'),
+      password: formData.get('password'),
+      role: isLogin ? undefined : formData.get('role'),
+      description: isLogin ? undefined : formData.get('description'), // Added description to payload
     };
 
     try {
       if (isLogin) {
         // Login Logic
         const response = await axios.post('/api/auth/login', payload);
-        const { token, userID } = response.data;
+        const { token, userID, username, email } = response.data;
 
-
-        localStorage.setItem("userID", userID); // Store userID in localStorage
-        localStorage.setItem("token", token);
-
+        localStorage.setItem('userID', userID); // Store userID in localStorage
+        localStorage.setItem('username', username); // Store userID in localStorage
+        localStorage.setItem('email', email); // Store userID in localStorage
+        localStorage.setItem('token', token);
 
         toast.success('Login successful!');
         console.log('Login Response:', response.data);
@@ -160,16 +158,16 @@ const AuthPage = () => {
                       <option value='TEACHER'>Teacher</option>
                     </select>
                   </div>
-                  <div className="form-control mt-4">
-                    <label className="label">
-                      <span className="label-text font-medium">
+                  <div className='form-control mt-4'>
+                    <label className='label'>
+                      <span className='label-text font-medium'>
                         Description
                       </span>
                     </label>
                     <textarea
-                      name="description"
-                      placeholder="Enter a description about yourself"
-                      className="textarea textarea-bordered"
+                      name='description'
+                      placeholder='Enter a description about yourself'
+                      className='textarea textarea-bordered'
                     ></textarea>
                   </div>
                 </>

@@ -5,7 +5,7 @@ const CoursesRow = ({ courses, isCarousel, width }) => {
   return (
     <>
       {courses.map((course) => {
-        console.log(course);
+        // console.log(course);
 
         return (
           <div
